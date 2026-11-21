@@ -1,0 +1,901 @@
+{
+  "canonical_sha256": "88edebc4ee95ea77ac4557314d7cde655d27fe52fb162eb7396d8cb4f9d7f143",
+  "part_b2_btz_wormhole_holonomy_parity": {
+    "even_horizon_2mouth_wormhole_L4_L4": {
+      "0_twists_++": {
+        "bulk_charpoly_int": [
+          0,
+          0,
+          -4,
+          0,
+          20,
+          0,
+          -9,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_4": false,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          8,
+          0,
+          0
+        ],
+        "bulk_thresh_4_inertia": [
+          6,
+          0,
+          2
+        ],
+        "bulk_thresh_4_witness": [
+          2,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "dtn_rank": 5,
+        "dtn_trace": "37/12",
+        "monopole_flux_1T_Lambda_1": "0/1"
+      },
+      "1_twist_-+": {
+        "bulk_charpoly_int": [
+          0,
+          0,
+          -20,
+          0,
+          24,
+          0,
+          -9,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_4": false,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          8,
+          0,
+          0
+        ],
+        "bulk_thresh_4_inertia": [
+          6,
+          0,
+          2
+        ],
+        "bulk_thresh_4_witness": [
+          0,
+          -3,
+          0,
+          3,
+          6,
+          0,
+          8,
+          0
+        ],
+        "dtn_rank": 6,
+        "dtn_trace": "68/21",
+        "krein_delta_dtn_inertia_pos_zero_neg": [
+          1,
+          4,
+          1
+        ],
+        "monopole_flux_1T_Lambda_1": "32/21"
+      },
+      "2_twists_--": {
+        "bulk_charpoly_int": [
+          16,
+          0,
+          -36,
+          0,
+          28,
+          0,
+          -9,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_4": true,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          8,
+          0,
+          0
+        ],
+        "bulk_thresh_4_inertia": [
+          6,
+          2,
+          0
+        ],
+        "dtn_rank": 6,
+        "dtn_trace": "237/70",
+        "krein_delta_dtn_inertia_pos_zero_neg": [
+          2,
+          2,
+          2
+        ],
+        "monopole_flux_1T_Lambda_1": "16/7"
+      }
+    },
+    "krein_balanced_signature_law_verified": "inertia(Lambda(chi) - Lambda(1)) == (k, |B|-2k, k) across all 8 tested k in {1,2} twisted BTZ configurations",
+    "odd_horizon_2mouth_wormhole_L3_L3": {
+      "0_twists_++_bridge+": {
+        "bulk_charpoly_int": [
+          3,
+          12,
+          11,
+          -4,
+          -7,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_5": false,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          6,
+          0,
+          0
+        ],
+        "bulk_thresh_5_inertia": [
+          5,
+          0,
+          1
+        ],
+        "bulk_thresh_5_witness": [
+          7,
+          5,
+          5,
+          3,
+          4,
+          0
+        ],
+        "dtn_rank": 3,
+        "dtn_trace": "11/6",
+        "monopole_flux_1T_Lambda_1": "0/1"
+      },
+      "0_twists_++_bridge-": {
+        "bulk_charpoly_int": [
+          3,
+          12,
+          11,
+          -4,
+          -7,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_5": false,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          6,
+          0,
+          0
+        ],
+        "bulk_thresh_5_inertia": [
+          5,
+          0,
+          1
+        ],
+        "bulk_thresh_5_witness": [
+          -7,
+          -5,
+          -5,
+          3,
+          4,
+          0
+        ],
+        "dtn_rank": 3,
+        "dtn_trace": "11/6",
+        "monopole_flux_1T_Lambda_1": "4/3"
+      },
+      "1_twist_+-_bridge+": {
+        "bulk_charpoly_int": [
+          -5,
+          0,
+          11,
+          0,
+          -7,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_5": true,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          6,
+          0,
+          0
+        ],
+        "bulk_thresh_5_inertia": [
+          4,
+          2,
+          0
+        ],
+        "dtn_rank": 4,
+        "dtn_trace": "17/8",
+        "krein_delta_dtn_inertia_pos_zero_neg": [
+          1,
+          2,
+          1
+        ],
+        "monopole_flux_1T_Lambda_1": "11/8"
+      },
+      "1_twist_-+_bridge+": {
+        "bulk_charpoly_int": [
+          -5,
+          0,
+          11,
+          0,
+          -7,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_5": true,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          6,
+          0,
+          0
+        ],
+        "bulk_thresh_5_inertia": [
+          4,
+          2,
+          0
+        ],
+        "dtn_rank": 4,
+        "dtn_trace": "17/8",
+        "krein_delta_dtn_inertia_pos_zero_neg": [
+          1,
+          2,
+          1
+        ],
+        "monopole_flux_1T_Lambda_1": "11/8"
+      },
+      "2_twists_--_bridge+": {
+        "bulk_charpoly_int": [
+          3,
+          -12,
+          11,
+          4,
+          -7,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_5": false,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          6,
+          0,
+          0
+        ],
+        "bulk_thresh_5_inertia": [
+          5,
+          0,
+          1
+        ],
+        "bulk_thresh_5_witness": [
+          -7,
+          -5,
+          5,
+          3,
+          4,
+          0
+        ],
+        "dtn_rank": 4,
+        "dtn_trace": "50/21",
+        "krein_delta_dtn_inertia_pos_zero_neg": [
+          2,
+          0,
+          2
+        ],
+        "monopole_flux_1T_Lambda_1": "2/1"
+      },
+      "2_twists_--_bridge-": {
+        "bulk_charpoly_int": [
+          3,
+          -12,
+          11,
+          4,
+          -7,
+          0,
+          1
+        ],
+        "bulk_is_ramanujan": true,
+        "bulk_le_sqrt_5": false,
+        "bulk_ramanujan_4pI_minus_A2_inertia": [
+          6,
+          0,
+          0
+        ],
+        "bulk_thresh_5_inertia": [
+          5,
+          0,
+          1
+        ],
+        "bulk_thresh_5_witness": [
+          7,
+          5,
+          -5,
+          3,
+          4,
+          0
+        ],
+        "dtn_rank": 4,
+        "dtn_trace": "50/21",
+        "monopole_flux_1T_Lambda_1": "2/1"
+      }
+    },
+    "oracle_class": "exact",
+    "parity_bifurcation_proved": "Odd-horizon (L=3,3): 1-twist (-+) strictly compresses bulk (<= sqrt(5)) while 2-twist (--) mirrors untwisted (++); Even-horizon bipartite (L=4,4): 2-twist (--) uniquely compresses bulk (<= 2)!",
+    "single_mouth_btz_b1_1": [
+      {
+        "L": 3,
+        "krein_delta_dtn_inertia": [
+          1,
+          1,
+          1
+        ],
+        "n_boundary": 3,
+        "p": 2,
+        "twisted_bulk_ramanujan": true,
+        "twisted_monopole_flux": "8/5",
+        "twisted_rank": 3,
+        "twisted_trace": "9/5",
+        "untwisted_rank": 2,
+        "untwisted_trace": "3/2"
+      },
+      {
+        "L": 4,
+        "krein_delta_dtn_inertia": [
+          1,
+          2,
+          1
+        ],
+        "n_boundary": 4,
+        "p": 2,
+        "twisted_bulk_ramanujan": true,
+        "twisted_monopole_flux": "12/7",
+        "twisted_rank": 4,
+        "twisted_trace": "16/7",
+        "untwisted_rank": 3,
+        "untwisted_trace": "32/15"
+      },
+      {
+        "L": 5,
+        "krein_delta_dtn_inertia": [
+          1,
+          3,
+          1
+        ],
+        "n_boundary": 5,
+        "p": 2,
+        "twisted_bulk_ramanujan": true,
+        "twisted_monopole_flux": "44/25",
+        "twisted_rank": 5,
+        "twisted_trace": "14/5",
+        "untwisted_rank": 4,
+        "untwisted_trace": "30/11"
+      },
+      {
+        "L": 4,
+        "krein_delta_dtn_inertia": [
+          1,
+          6,
+          1
+        ],
+        "n_boundary": 8,
+        "p": 3,
+        "twisted_bulk_ramanujan": true,
+        "twisted_monopole_flux": "16/7",
+        "twisted_rank": 8,
+        "twisted_trace": "40/7",
+        "untwisted_rank": 7,
+        "untwisted_trace": "17/3"
+      }
+    ]
+  },
+  "part_c_niemeier_24_and_quantization": {
+    "five_exact_isospectral_pairs": [
+      [
+        "A5^4_D4",
+        "D4^6"
+      ],
+      [
+        "A9^2_D6",
+        "D6^4"
+      ],
+      [
+        "A11_D7_E6",
+        "E6^4"
+      ],
+      [
+        "A17_E7",
+        "D10_E7^2"
+      ],
+      [
+        "D16_E8",
+        "E8^3"
+      ]
+    ],
+    "niemeier_count_verified": 24,
+    "oracle_class": "exact+sampled",
+    "ramanujan_tau_partial_sum_sign_census_m1_214": {
+      "T_1": 1,
+      "T_13": -578358,
+      "T_2": -23,
+      "T_214": 1970276759459,
+      "T_53": -2000920858,
+      "negative_count": 99,
+      "positive_count": 115,
+      "zero_count": 0
+    },
+    "safe_scale_400x24_benchmark": {
+      "2.0_bpw": {
+        "D16p_E8_r720_isospectral_twin": {
+          "outside_count": 0,
+          "proved_bound_dB": -5.773569,
+          "safe_mse_dB": -8.221393,
+          "worst_ratio": 0.721083
+        },
+        "D24p_r1104_max_roots": {
+          "outside_count": 0,
+          "proved_bound_dB": -5.773569,
+          "safe_mse_dB": -8.141512,
+          "worst_ratio": 0.719529
+        },
+        "E8^3_r720": {
+          "outside_count": 0,
+          "proved_bound_dB": -5.773569,
+          "safe_mse_dB": -8.229874,
+          "worst_ratio": 0.708024
+        },
+        "Leech24_r0_exact_proved_bound_dB": -8.317992,
+        "m_cap_all_24_niemeier": 13
+      },
+      "4.0_bpw": {
+        "D16p_E8_r720_isospectral_twin": {
+          "outside_count": 0,
+          "proved_bound_dB": -20.783772,
+          "safe_mse_dB": -23.235122,
+          "worst_ratio": 0.736507
+        },
+        "D24p_r1104_max_roots": {
+          "outside_count": 0,
+          "proved_bound_dB": -20.783772,
+          "safe_mse_dB": -23.147583,
+          "worst_ratio": 0.737191
+        },
+        "E8^3_r720": {
+          "outside_count": 0,
+          "proved_bound_dB": -20.783772,
+          "safe_mse_dB": -23.251056,
+          "worst_ratio": 0.750412
+        },
+        "Leech24_r0_exact_proved_bound_dB": -22.689113,
+        "m_cap_all_24_niemeier": 214
+      }
+    },
+    "unbiased_G_and_rho2_comparison": {
+      "D16p_E8_r720_isospectral_twin": {
+        "G_sampled": 0.071353,
+        "cert_gap_rho2_over_24G_dB": 2.434994,
+        "rho2": 3
+      },
+      "D24p_r1104_max_roots": {
+        "G_sampled": 0.072524,
+        "cert_gap_rho2_over_24G_dB": 2.364301,
+        "rho2": 3
+      },
+      "E8^3_r720": {
+        "G_exact_929_over_12960": 0.071682,
+        "G_sampled": 0.071686,
+        "cert_gap_rho2_over_24G_dB": 2.414993,
+        "rho2": 3
+      },
+      "Leech24_r0_exact_rho2": 2,
+      "Leech24_r0_ref_G_AUDIT028": 0.065771,
+      "isospectral_twin_D16pE8_beats_E8x3_dB": 0.020216,
+      "max_root_D24p_worse_than_E8x3_dB": -0.050477
+    },
+    "universal_ball_cap_invariance_all_24_niemeier": {
+      "1.0_bpw": 2,
+      "1.5_bpw": 6,
+      "2.0_bpw": 13,
+      "2.5_bpw": 26,
+      "3.0_bpw": 53,
+      "4.0_bpw": 214
+    }
+  },
+  "part_d_r5_controls": {
+    "controls": [
+      {
+        "caught": "NOT_REGULAR",
+        "control": "C1_non_regular_rejected",
+        "expected": "NOT_REGULAR",
+        "rejected": true
+      },
+      {
+        "caught": "n_neg=1",
+        "control": "C2_dumbbell14_non_ramanujan_refuted_int_witness",
+        "expected": "n_neg>=1 & w^T M w < 0",
+        "rejected": true
+      },
+      {
+        "caught": "quad=-7",
+        "control": "C3_k4_trivial_lift_refuted",
+        "expected": "n_neg>=1 & w^T M w < 0",
+        "rejected": true
+      },
+      {
+        "caught": "INVALID_SIGN",
+        "control": "C4_invalid_sign_chi2_rejected",
+        "expected": "INVALID_SIGN",
+        "rejected": true
+      },
+      {
+        "caught": "NOT_SYMMETRIC",
+        "control": "C5_asymmetric_matrix_rejected",
+        "expected": "NOT_SYMMETRIC",
+        "rejected": true
+      },
+      {
+        "caught": "NON_UNIFORM_COXETER",
+        "control": "C6_nonuniform_coxeter_niemeier_rejected",
+        "expected": "NON_UNIFORM_COXETER",
+        "rejected": true
+      },
+      {
+        "caught": "BAD_NIEMEIER_RANK",
+        "control": "C7_wrong_rank_niemeier_rejected",
+        "expected": "BAD_NIEMEIER_RANK",
+        "rejected": true
+      },
+      {
+        "caught": "INVALID_TYPE",
+        "control": "C8_bool_rank_rejected",
+        "expected": "INVALID_TYPE",
+        "rejected": true
+      }
+    ],
+    "controls_passed": 8,
+    "controls_total": 8
+  },
+  "parts_a_b1_ramanujan_cohomology_sweep": {
+    "graphs": [
+      {
+        "base_cert": {
+          "degree": 3,
+          "inertia_pos_zero_neg": [
+            4,
+            0,
+            0
+          ],
+          "is_bipartite": false,
+          "is_ramanujan": true,
+          "n_verts": 4,
+          "p_param": 2,
+          "refutation_witness_int": null,
+          "refutation_witness_quad_int": null
+        },
+        "betti_b1": 3,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 8,
+        "name": "K4",
+        "neg_inertia_histogram": {
+          "0": 6,
+          "1": 2
+        },
+        "nontrivial_non_antibalanced_failures": 0,
+        "ramanujan_lift_classes": 6,
+        "ramanujan_lift_fraction": "3/4",
+        "sample_nontrivial_refutation": null
+      },
+      {
+        "base_cert": {
+          "degree": 3,
+          "inertia_pos_zero_neg": [
+            6,
+            0,
+            0
+          ],
+          "is_bipartite": true,
+          "is_ramanujan": true,
+          "n_verts": 6,
+          "p_param": 2,
+          "refutation_witness_int": null,
+          "refutation_witness_quad_int": null
+        },
+        "betti_b1": 4,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 16,
+        "name": "K3_3_bipartite",
+        "neg_inertia_histogram": {
+          "0": 15,
+          "2": 1
+        },
+        "nontrivial_non_antibalanced_failures": 0,
+        "ramanujan_lift_classes": 15,
+        "ramanujan_lift_fraction": "15/16",
+        "sample_nontrivial_refutation": null
+      },
+      {
+        "base_cert": {
+          "degree": 3,
+          "inertia_pos_zero_neg": [
+            6,
+            0,
+            0
+          ],
+          "is_bipartite": false,
+          "is_ramanujan": true,
+          "n_verts": 6,
+          "p_param": 2,
+          "refutation_witness_int": null,
+          "refutation_witness_quad_int": null
+        },
+        "betti_b1": 4,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 16,
+        "name": "Prism_Y3_2mouth",
+        "neg_inertia_histogram": {
+          "0": 14,
+          "1": 2
+        },
+        "nontrivial_non_antibalanced_failures": 0,
+        "ramanujan_lift_classes": 14,
+        "ramanujan_lift_fraction": "7/8",
+        "sample_nontrivial_refutation": null
+      },
+      {
+        "base_cert": {
+          "degree": 3,
+          "inertia_pos_zero_neg": [
+            8,
+            0,
+            0
+          ],
+          "is_bipartite": true,
+          "is_ramanujan": true,
+          "n_verts": 8,
+          "p_param": 2,
+          "refutation_witness_int": null,
+          "refutation_witness_quad_int": null
+        },
+        "betti_b1": 5,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 32,
+        "name": "Cube_Q3_bipartite",
+        "neg_inertia_histogram": {
+          "0": 31,
+          "2": 1
+        },
+        "nontrivial_non_antibalanced_failures": 0,
+        "ramanujan_lift_classes": 31,
+        "ramanujan_lift_fraction": "31/32",
+        "sample_nontrivial_refutation": null
+      },
+      {
+        "base_cert": {
+          "degree": 3,
+          "inertia_pos_zero_neg": [
+            10,
+            0,
+            0
+          ],
+          "is_bipartite": false,
+          "is_ramanujan": true,
+          "n_verts": 10,
+          "p_param": 2,
+          "refutation_witness_int": null,
+          "refutation_witness_quad_int": null
+        },
+        "betti_b1": 6,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 64,
+        "name": "Petersen_P10",
+        "neg_inertia_histogram": {
+          "0": 62,
+          "1": 2
+        },
+        "nontrivial_non_antibalanced_failures": 0,
+        "ramanujan_lift_classes": 62,
+        "ramanujan_lift_fraction": "31/32",
+        "sample_nontrivial_refutation": null
+      },
+      {
+        "base_cert": {
+          "degree": 3,
+          "inertia_pos_zero_neg": [
+            14,
+            0,
+            0
+          ],
+          "is_bipartite": true,
+          "is_ramanujan": true,
+          "n_verts": 14,
+          "p_param": 2,
+          "refutation_witness_int": null,
+          "refutation_witness_quad_int": null
+        },
+        "betti_b1": 8,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 256,
+        "name": "Heawood_H14_bipartite",
+        "neg_inertia_histogram": {
+          "0": 234,
+          "2": 22
+        },
+        "nontrivial_non_antibalanced_failures": 21,
+        "ramanujan_lift_classes": 234,
+        "ramanujan_lift_fraction": "117/128",
+        "sample_nontrivial_refutation": {
+          "chord_mask": 1,
+          "inertia_pos_zero_neg": [
+            12,
+            0,
+            2
+          ],
+          "witness_int": [
+            6,
+            7,
+            3,
+            6,
+            7,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "witness_quad_int": -36
+        }
+      },
+      {
+        "base_cert": {
+          "degree": 4,
+          "inertia_pos_zero_neg": [
+            5,
+            0,
+            0
+          ],
+          "is_bipartite": false,
+          "is_ramanujan": true,
+          "n_verts": 5,
+          "p_param": 3,
+          "refutation_witness_int": null,
+          "refutation_witness_quad_int": null
+        },
+        "betti_b1": 6,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 64,
+        "name": "K5",
+        "neg_inertia_histogram": {
+          "0": 62,
+          "1": 2
+        },
+        "nontrivial_non_antibalanced_failures": 0,
+        "ramanujan_lift_classes": 62,
+        "ramanujan_lift_fraction": "31/32",
+        "sample_nontrivial_refutation": null
+      },
+      {
+        "base_cert": {
+          "degree": 4,
+          "inertia_pos_zero_neg": [
+            6,
+            0,
+            0
+          ],
+          "is_bipartite": false,
+          "is_ramanujan": true,
+          "n_verts": 6,
+          "p_param": 3,
+          "refutation_witness_int": null,
+          "refutation_witness_quad_int": null
+        },
+        "betti_b1": 7,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 128,
+        "name": "Octahedron_K222",
+        "neg_inertia_histogram": {
+          "0": 102,
+          "1": 26
+        },
+        "nontrivial_non_antibalanced_failures": 24,
+        "ramanujan_lift_classes": 102,
+        "ramanujan_lift_fraction": "51/64",
+        "sample_nontrivial_refutation": {
+          "chord_mask": 1,
+          "inertia_pos_zero_neg": [
+            5,
+            0,
+            1
+          ],
+          "witness_int": [
+            9,
+            6,
+            9,
+            6,
+            8,
+            7
+          ],
+          "witness_quad_int": -84
+        }
+      },
+      {
+        "base_cert": {
+          "degree": 3,
+          "inertia_pos_zero_neg": [
+            13,
+            0,
+            1
+          ],
+          "is_bipartite": false,
+          "is_ramanujan": false,
+          "n_verts": 14,
+          "p_param": 2,
+          "refutation_witness_int": [
+            -324105,
+            -324105,
+            -302375,
+            -302375,
+            -241900,
+            -241900,
+            -133250,
+            361087,
+            361087,
+            320151,
+            340810,
+            225339,
+            80726,
+            0
+          ],
+          "refutation_witness_quad_int": -957270381116
+        },
+        "betti_b1": 8,
+        "h1_vertex_gauge_invariance_verified": true,
+        "h1_z2_total_classes": 256,
+        "name": "Dumbbell14_nonRam_base",
+        "neg_inertia_histogram": {
+          "0": 196,
+          "1": 56,
+          "2": 4
+        },
+        "nontrivial_non_antibalanced_failures": 58,
+        "ramanujan_lift_classes": 196,
+        "ramanujan_lift_fraction": "49/64",
+        "sample_nontrivial_refutation": {
+          "chord_mask": 1,
+          "inertia_pos_zero_neg": [
+            13,
+            0,
+            1
+          ],
+          "witness_int": [
+            8692,
+            6970,
+            14965,
+            18081,
+            19270,
+            21074,
+            55473,
+            163180,
+            163180,
+            139937,
+            145628,
+            121906,
+            82069,
+            0
+          ],
+          "witness_quad_int": -19149241839
+        }
+      }
+    ],
+    "oracle_class": "exact",
+    "total_h1_z2_classes_exhaustively_certified": 840
+  },
+  "schema": "aletheia.wave2.round4.ramanujan_btz_graphs.v1",
+  "verdict": "ALL_RAMANUJAN_BTZ_NIEMEIER_PARTS_VERIFIED"
+}

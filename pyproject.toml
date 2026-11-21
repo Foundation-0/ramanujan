@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ramanujan"
+version = "0.1.0"
+description = "Exact zero-dependency pure-stdlib verification instruments for Ramanujan graphs & H^1(G, Z_2) signed 2-lifts, mock modular Euler-Witt shadows, PGL(2, Q[[q]]) continued fractions & Mellin equalizers, and integer Ramanujan-sum subspaces."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+ramanujan = "ramanujan.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ramanujan*"]

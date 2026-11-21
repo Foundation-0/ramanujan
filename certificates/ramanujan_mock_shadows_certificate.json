@@ -1,0 +1,2150 @@
+{
+  "arm": "R4-2",
+  "canonical_sha256": "6a93e34e74323d50193cd407372dd0119726eca94d2417ee4f57a03f3d7537f0",
+  "honest_novelty_claim": "N1",
+  "oracle_class": "exact+anchor",
+  "part1_mock_theta_and_appell_lerch": {
+    "checks": {
+      "appell_lerch_eta2_omega": true,
+      "appell_lerch_eta_f": true,
+      "crank_neg1_eq_theta4_sq_over_eta": true,
+      "mock3_2phi_neg_minus_f_eq_crank_neg1": true,
+      "mock3_f_plus_4psi_neg_eq_crank_neg1": true,
+      "mock5_chi0_eq_2F0_minus_phi0_neg": true,
+      "mock5_chi1_eq_2F1_plus_qinv_phi1_neg": true,
+      "mock5_f0_plus_2F0_q2_minus_2_eq_phi0_neg_q2_plus_psi0": true,
+      "universal_2g2_neg1_integer_coeffs": true,
+      "universal_g3_f_eq_2_minus_2g3_neg1": true,
+      "universal_g3_omega_eq_g3_q_q2": true
+    },
+    "identities_all_verified": true,
+    "sample_coeffs_first_12": {
+      "crank_neg1": [
+        1,
+        -3,
+        2,
+        -1,
+        5,
+        -5,
+        3,
+        -5,
+        6,
+        -10,
+        10,
+        -8
+      ],
+      "m3_f": [
+        1,
+        1,
+        -2,
+        3,
+        -3,
+        3,
+        -5,
+        7,
+        -6,
+        6,
+        -10,
+        12
+      ],
+      "m3_omega": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        8,
+        10,
+        14,
+        18,
+        22,
+        29,
+        36
+      ],
+      "m5_f0": [
+        1,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        -1,
+        1,
+        0,
+        1,
+        -2,
+        1
+      ],
+      "m7_F0": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        2,
+        1,
+        2,
+        1,
+        2
+      ],
+      "m7_F1": [
+        0,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2,
+        3,
+        3,
+        2
+      ],
+      "m7_F2": [
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        2,
+        3,
+        3,
+        4,
+        4
+      ],
+      "two_g2_neg1": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "truncation_order": 70,
+    "universal_truncation_order": 50
+  },
+  "part2_four_tier_hankel_euler_witt_filtration": {
+    "law3_additive_hankel_refutation": {
+      "conclusion": "Additive Hankel inertia alone CANNOT separate modular from partial/mock thetas.",
+      "partition_turan_2x2_hankel_det_negative_for_s_25_to_67": true,
+      "theta3_vs_partial_theta_shifted_H12_exact_ratio_2": true
+    },
+    "tier1_and_tier2_hankel_table": [
+      {
+        "additive_H12_inertia": [
+          2,
+          10,
+          0
+        ],
+        "additive_H12_rank": 2,
+        "b_first_10": [
+          "1",
+          "1",
+          "1",
+          "1",
+          "2",
+          "2",
+          "4",
+          "5",
+          "8",
+          "11"
+        ],
+        "class": "rational",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          9,
+          0,
+          5
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "rational_fib"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-1",
+          "-1",
+          "-1",
+          "-1",
+          "-1",
+          "-1",
+          "-1",
+          "-1",
+          "-1",
+          "-1"
+        ],
+        "class": "modular_eta_quot",
+        "euler_witt_H10_rank": 1,
+        "euler_witt_H14_inertia": [
+          0,
+          13,
+          1
+        ],
+        "euler_witt_H14_rank": 1,
+        "euler_witt_exact_period_up_to_42": 1,
+        "euler_witt_saturated_by_14": true,
+        "name": "eta1"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "class": "modular_eta_quot",
+        "euler_witt_H10_rank": 1,
+        "euler_witt_H14_inertia": [
+          1,
+          13,
+          0
+        ],
+        "euler_witt_H14_rank": 1,
+        "euler_witt_exact_period_up_to_42": 1,
+        "euler_witt_saturated_by_14": true,
+        "name": "p_ser_1_over_eta"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-24",
+          "-24",
+          "-24",
+          "-24",
+          "-24",
+          "-24",
+          "-24",
+          "-24",
+          "-24",
+          "-24"
+        ],
+        "class": "modular_eta_quot",
+        "euler_witt_H10_rank": 1,
+        "euler_witt_H14_inertia": [
+          0,
+          13,
+          1
+        ],
+        "euler_witt_H14_rank": 1,
+        "euler_witt_exact_period_up_to_42": 1,
+        "euler_witt_saturated_by_14": true,
+        "name": "delta_q_tau"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "2",
+          "-3",
+          "2",
+          "-1",
+          "2",
+          "-3",
+          "2",
+          "-1",
+          "2",
+          "-3"
+        ],
+        "class": "modular_eta_quot",
+        "euler_witt_H10_rank": 3,
+        "euler_witt_H14_inertia": [
+          2,
+          11,
+          1
+        ],
+        "euler_witt_H14_rank": 3,
+        "euler_witt_exact_period_up_to_42": 4,
+        "euler_witt_saturated_by_14": true,
+        "name": "theta3"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-2",
+          "-1",
+          "-2",
+          "-1",
+          "-2",
+          "-1",
+          "-2",
+          "-1",
+          "-2",
+          "-1"
+        ],
+        "class": "modular_eta_quot",
+        "euler_witt_H10_rank": 2,
+        "euler_witt_H14_inertia": [
+          0,
+          12,
+          2
+        ],
+        "euler_witt_H14_rank": 2,
+        "euler_witt_exact_period_up_to_42": 2,
+        "euler_witt_saturated_by_14": true,
+        "name": "theta4"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-3",
+          "-1",
+          "-3",
+          "-1",
+          "-3",
+          "-1",
+          "-3",
+          "-1",
+          "-3",
+          "-1"
+        ],
+        "class": "modular_eta_quot",
+        "euler_witt_H10_rank": 2,
+        "euler_witt_H14_inertia": [
+          0,
+          12,
+          2
+        ],
+        "euler_witt_H14_rank": 2,
+        "euler_witt_exact_period_up_to_42": 2,
+        "euler_witt_saturated_by_14": true,
+        "name": "crank_neg1"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "240",
+          "-26760",
+          "4096240",
+          "-708938760",
+          "130880766192",
+          "-25168873498760",
+          "4978357936128240",
+          "-1005225129317834760",
+          "206195878414962688240",
+          "-42824436296045618358408"
+        ],
+        "class": "modular_interior_zero",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          12,
+          0,
+          2
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "E4"
+      },
+      {
+        "additive_H12_inertia": [
+          5,
+          0,
+          7
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-504",
+          "-143388",
+          "-51180024",
+          "-20556578700",
+          "-8806299845112",
+          "-3929750661380124",
+          "-1803727445909594616",
+          "-845145871847732769804",
+          "-402283166289266872824312",
+          "-193877350835487271784566812"
+        ],
+        "class": "modular_interior_zero",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          2,
+          0,
+          12
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "E6"
+      },
+      {
+        "additive_H12_inertia": [
+          5,
+          0,
+          7
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-24",
+          "-348",
+          "-6424",
+          "-129300",
+          "-2778648",
+          "-62114524",
+          "-1428337176",
+          "-33527349924",
+          "-799482197272",
+          "-19302454317660"
+        ],
+        "class": "quasimodular",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          1,
+          0,
+          13
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "E2"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "-3",
+          "5",
+          "-9",
+          "21",
+          "-49",
+          "105",
+          "-229",
+          "533",
+          "-1249"
+        ],
+        "class": "mock_order3",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          8,
+          0,
+          6
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m3_f"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "-1",
+          "-1",
+          "2",
+          "-1",
+          "0",
+          "1",
+          "-3",
+          "3",
+          "0"
+        ],
+        "class": "mock_order3",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          6,
+          0,
+          8
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m3_phi"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "0",
+          "-1",
+          "0",
+          "0",
+          "1",
+          "0",
+          "-1",
+          "1",
+          "-1"
+        ],
+        "class": "mock_order3",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          8,
+          0,
+          6
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m3_chi"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "2",
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "2",
+          "-1",
+          "0",
+          "3"
+        ],
+        "class": "mock_order3",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          8,
+          0,
+          6
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m3_omega"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-1",
+          "2",
+          "0",
+          "-1",
+          "-1",
+          "1",
+          "1",
+          "0",
+          "-2",
+          "0"
+        ],
+        "class": "mock_order3",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          6,
+          0,
+          8
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m3_nu"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-1",
+          "0",
+          "1",
+          "1",
+          "0",
+          "0",
+          "-1",
+          "-1",
+          "0",
+          "0"
+        ],
+        "class": "mock_order3",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          7,
+          0,
+          7
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m3_rho"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "-2",
+          "2",
+          "-2",
+          "4",
+          "-8",
+          "12",
+          "-18",
+          "33",
+          "-60"
+        ],
+        "class": "mock_order5",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          8,
+          0,
+          6
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m5_f0"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "0",
+          "1",
+          "1",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "1",
+          "1",
+          "0"
+        ],
+        "class": "mock_order5",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          8,
+          0,
+          6
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m5_F0"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "-1",
+          "1",
+          "0",
+          "1",
+          "-2",
+          "3",
+          "-3",
+          "5",
+          "-7"
+        ],
+        "class": "mock_order7",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          9,
+          0,
+          5
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m7_F0"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "-1",
+          "0",
+          "1",
+          "-1",
+          "1",
+          "-1",
+          "0",
+          "1",
+          "-1"
+        ],
+        "class": "partial_theta",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          8,
+          0,
+          6
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "partial_theta"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-1",
+          "0",
+          "1",
+          "1",
+          "1",
+          "-1",
+          "-1",
+          "-2",
+          "-1",
+          "1"
+        ],
+        "class": "false_theta",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          7,
+          0,
+          7
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "false_tri"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "-2",
+          "1",
+          "-1",
+          "1",
+          "-2",
+          "3",
+          "-3",
+          "5",
+          "-8"
+        ],
+        "class": "false_theta",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          8,
+          0,
+          6
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "false_pent"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-3",
+          "-1",
+          "-3",
+          "-1",
+          "-3",
+          "-1",
+          "-3",
+          "-1",
+          "-3",
+          "-1"
+        ],
+        "class": "mock_shadow_cancelled",
+        "euler_witt_H10_rank": 2,
+        "euler_witt_H14_inertia": [
+          0,
+          12,
+          2
+        ],
+        "euler_witt_H14_rank": 2,
+        "euler_witt_exact_period_up_to_42": 2,
+        "euler_witt_saturated_by_14": true,
+        "name": "m3_cancel_f_plus_4psi_neg"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "5",
+          "-21",
+          "77",
+          "-361",
+          "1837",
+          "-9537",
+          "50549",
+          "-274233",
+          "1513357",
+          "-8451361"
+        ],
+        "class": "mock_shadow_doubled",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          10,
+          0,
+          4
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m3_double_f_minus_4psi_neg"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "1",
+          "-3",
+          "1",
+          "1",
+          "-1",
+          "1",
+          "1",
+          "-3",
+          "1"
+        ],
+        "class": "mock_shadow_cancelled",
+        "euler_witt_H10_rank": 5,
+        "euler_witt_H14_inertia": [
+          2,
+          9,
+          3
+        ],
+        "euler_witt_H14_rank": 5,
+        "euler_witt_exact_period_up_to_42": 6,
+        "euler_witt_saturated_by_14": true,
+        "name": "m3_cancel_4chi_minus_f"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "0",
+          "1",
+          "2",
+          "1",
+          "0",
+          "-1",
+          "0",
+          "1",
+          "2",
+          "1"
+        ],
+        "class": "mock_shadow_cancelled",
+        "euler_witt_H10_rank": 4,
+        "euler_witt_H14_inertia": [
+          3,
+          10,
+          1
+        ],
+        "euler_witt_H14_rank": 4,
+        "euler_witt_exact_period_up_to_42": 6,
+        "euler_witt_saturated_by_14": true,
+        "name": "m3_cancel_2rho_plus_omega"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "0",
+          "2",
+          "0",
+          "-1",
+          "0",
+          "2",
+          "0",
+          "-1",
+          "0",
+          "2"
+        ],
+        "class": "mock_shadow_cancelled",
+        "euler_witt_H10_rank": 4,
+        "euler_witt_H14_inertia": [
+          2,
+          10,
+          2
+        ],
+        "euler_witt_H14_rank": 4,
+        "euler_witt_exact_period_up_to_42": 4,
+        "euler_witt_saturated_by_14": true,
+        "name": "m3_cancel_nu_plus_q_om_q2"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-2",
+          "1",
+          "-2",
+          "-4",
+          "-8",
+          "-11",
+          "-22",
+          "-39",
+          "-78",
+          "-142"
+        ],
+        "class": "mock_shadow_doubled",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          5,
+          0,
+          9
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m3_double_nu_minus_q_om_q2"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-1",
+          "-1",
+          "-2",
+          "0",
+          "-2",
+          "0",
+          "-2",
+          "-1",
+          "-1",
+          "-1"
+        ],
+        "class": "mock_shadow_cancelled",
+        "euler_witt_H10_rank": 6,
+        "euler_witt_H14_inertia": [
+          2,
+          8,
+          4
+        ],
+        "euler_witt_H14_rank": 6,
+        "euler_witt_exact_period_up_to_42": 10,
+        "euler_witt_saturated_by_14": true,
+        "name": "m5_cancel_f0_plus_2psi0_neg"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-2",
+          "0",
+          "-1",
+          "-1",
+          "-2",
+          "-1",
+          "-1",
+          "0",
+          "-2",
+          "-1"
+        ],
+        "class": "mock_shadow_cancelled",
+        "euler_witt_H10_rank": 6,
+        "euler_witt_H14_inertia": [
+          2,
+          8,
+          4
+        ],
+        "euler_witt_H14_rank": 6,
+        "euler_witt_exact_period_up_to_42": 10,
+        "euler_witt_saturated_by_14": true,
+        "name": "m5_cancel_2psi1_neg_minus_f1"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "1",
+          "-2",
+          "2",
+          "0",
+          "2",
+          "-2",
+          "2",
+          "-1",
+          "1",
+          "-3"
+        ],
+        "class": "mock_shadow_cancelled",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          8,
+          0,
+          6
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": 20,
+        "euler_witt_saturated_by_14": false,
+        "name": "m5_cancel_phi0_neg_q2_plus_psi0"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "-1",
+          "-1",
+          "-2",
+          "-2",
+          "-4",
+          "-6",
+          "-12",
+          "-18",
+          "-33",
+          "-56"
+        ],
+        "class": "mock_shadow_doubled",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          4,
+          0,
+          10
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "m5_double_phi0_neg_q2_minus_psi0"
+      },
+      {
+        "additive_H12_inertia": [
+          5,
+          1,
+          6
+        ],
+        "additive_H12_rank": 11,
+        "b_first_10": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "-1",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "class": "cs11_null_shuffled",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          7,
+          0,
+          7
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "cs11_shuf_eta1"
+      },
+      {
+        "additive_H12_inertia": [
+          5,
+          3,
+          4
+        ],
+        "additive_H12_rank": 9,
+        "b_first_10": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "2",
+          "2",
+          "0",
+          "0",
+          "0",
+          "-3"
+        ],
+        "class": "cs11_null_shuffled",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          7,
+          0,
+          7
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "cs11_shuf_theta3"
+      },
+      {
+        "additive_H12_inertia": [
+          7,
+          0,
+          5
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "25",
+          "50",
+          "-4180",
+          "66484",
+          "-391485",
+          "-8480899",
+          "286799823",
+          "-3888645080",
+          "2732158933",
+          "1106029297401"
+        ],
+        "class": "cs11_null_shuffled",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          7,
+          0,
+          7
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "cs11_shuf_crank_neg1"
+      },
+      {
+        "additive_H12_inertia": [
+          6,
+          0,
+          6
+        ],
+        "additive_H12_rank": 12,
+        "b_first_10": [
+          "51",
+          "-1325",
+          "44067",
+          "-1684022",
+          "68667106",
+          "-2915510301",
+          "127323433264",
+          "-5676231482969",
+          "257070006675165",
+          "-11787933800829759"
+        ],
+        "class": "cs11_null_shuffled",
+        "euler_witt_H10_rank": 10,
+        "euler_witt_H14_inertia": [
+          12,
+          0,
+          2
+        ],
+        "euler_witt_H14_rank": 14,
+        "euler_witt_exact_period_up_to_42": null,
+        "euler_witt_saturated_by_14": false,
+        "name": "cs11_shuf_m3_f"
+      }
+    ],
+    "tier2_period20_m22_collapse": {
+      "cancel_phi0_neg_q2_plus_psi0_inertia": [
+        11,
+        2,
+        9
+      ],
+      "cancel_phi0_neg_q2_plus_psi0_rank": 20,
+      "double_phi0_neg_q2_minus_psi0_inertia": [
+        7,
+        0,
+        15
+      ],
+      "double_phi0_neg_q2_minus_psi0_rank": 22,
+      "hankel_size": 22
+    },
+    "tier3_hecke_gram_schur_zero": {
+      "p=2": true,
+      "p=3": true,
+      "p=5": true
+    },
+    "tier3_log_deriv_r_opt_vs_r_h4": [
+      {
+        "class": "modular_interior_zero",
+        "name": "E4",
+        "r_h4_ceil": 3,
+        "r_h4_num_bits": 973,
+        "r_h4_x10000": 20000,
+        "r_opt_ceil": 2,
+        "r_opt_num_bits": 435,
+        "r_opt_x10000": 10000
+      },
+      {
+        "class": "modular_interior_zero",
+        "name": "E6",
+        "r_h4_ceil": 3,
+        "r_h4_num_bits": 1206,
+        "r_h4_x10000": 20000,
+        "r_opt_ceil": 2,
+        "r_opt_num_bits": 504,
+        "r_opt_x10000": 10000
+      },
+      {
+        "class": "quasimodular",
+        "name": "E2",
+        "r_h4_ceil": 3,
+        "r_h4_num_bits": 568,
+        "r_h4_x10000": 20000,
+        "r_opt_ceil": 2,
+        "r_opt_num_bits": 262,
+        "r_opt_x10000": 10000
+      },
+      {
+        "class": "mock_order3",
+        "name": "m3_f",
+        "r_h4_ceil": 4,
+        "r_h4_num_bits": 180,
+        "r_h4_x10000": 30538,
+        "r_opt_ceil": 2,
+        "r_opt_num_bits": 82,
+        "r_opt_x10000": 10000
+      },
+      {
+        "class": "mock_order5",
+        "name": "m5_f0",
+        "r_h4_ceil": 4,
+        "r_h4_num_bits": 128,
+        "r_h4_x10000": 34619,
+        "r_opt_ceil": 2,
+        "r_opt_num_bits": 53,
+        "r_opt_x10000": 10000
+      },
+      {
+        "class": "false_theta",
+        "name": "false_pent",
+        "r_h4_ceil": 5,
+        "r_h4_num_bits": 91,
+        "r_h4_x10000": 42798,
+        "r_opt_ceil": 2,
+        "r_opt_num_bits": 40,
+        "r_opt_x10000": 10006
+      },
+      {
+        "class": "partial_theta",
+        "name": "partial_theta",
+        "r_h4_ceil": 6,
+        "r_h4_num_bits": 60,
+        "r_h4_x10000": 52660,
+        "r_opt_ceil": 3,
+        "r_opt_num_bits": 26,
+        "r_opt_x10000": 20619
+      }
+    ],
+    "tier3_ramanujan_ode_all_exact_zero_residual": true,
+    "tier3_ramanujan_ode_closure_order": 70
+  },
+  "part3_rank_crank_schur_obstruction": {
+    "by_prime": {
+      "p=11": {
+        "S_shadow_ranks_by_rem": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "congruence_class": 6,
+        "congruence_parseval_defects_first_8": [
+          {
+            "n": 6,
+            "p_n": 11,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 44
+          },
+          {
+            "n": 17,
+            "p_n": 297,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 286
+          },
+          {
+            "n": 28,
+            "p_n": 3718,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 2618
+          },
+          {
+            "n": 39,
+            "p_n": 31185,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 17182
+          },
+          {
+            "n": 50,
+            "p_n": 204226,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 91696
+          },
+          {
+            "n": 61,
+            "p_n": 1121505,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 420266
+          },
+          {
+            "n": 72,
+            "p_n": 5392783,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 1721302
+          },
+          {
+            "n": 83,
+            "p_n": 23338469,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 6413968
+          }
+        ],
+        "congruence_terms_checked": 14,
+        "crank_ranks_by_rem": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "legendre_1_minus_24r": [
+          1,
+          -1,
+          -1,
+          -1,
+          1,
+          -1,
+          0,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "legendre_selection_law_exact": false,
+        "n_limit": 150,
+        "palindromic_dim": 5,
+        "prime": 11,
+        "rank_ranks_by_rem": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      "p=13": {
+        "S_shadow_ranks_by_rem": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "congruence_class": null,
+        "congruence_parseval_defects_first_8": [],
+        "congruence_terms_checked": 0,
+        "crank_ranks_by_rem": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "legendre_1_minus_24r": [
+          1,
+          1,
+          -1,
+          -1,
+          1,
+          -1,
+          0,
+          -1,
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "legendre_selection_law_exact": false,
+        "n_limit": 180,
+        "palindromic_dim": 6,
+        "prime": 13,
+        "rank_ranks_by_rem": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      "p=5": {
+        "S_shadow_ranks_by_rem": [
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "congruence_class": 4,
+        "congruence_parseval_defects_first_8": [
+          {
+            "n": 4,
+            "p_n": 5,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 9,
+            "p_n": 30,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 14,
+            "p_n": 135,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 19,
+            "p_n": 490,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 24,
+            "p_n": 1575,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 29,
+            "p_n": 4565,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 34,
+            "p_n": 12310,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 39,
+            "p_n": 31185,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          }
+        ],
+        "congruence_terms_checked": 19,
+        "crank_ranks_by_rem": [
+          1,
+          1,
+          1,
+          1,
+          0
+        ],
+        "legendre_1_minus_24r": [
+          1,
+          -1,
+          -1,
+          1,
+          0
+        ],
+        "legendre_selection_law_exact": true,
+        "n_limit": 95,
+        "palindromic_dim": 2,
+        "prime": 5,
+        "rank_ranks_by_rem": [
+          2,
+          1,
+          1,
+          2,
+          0
+        ]
+      },
+      "p=7": {
+        "S_shadow_ranks_by_rem": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "congruence_class": 5,
+        "congruence_parseval_defects_first_8": [
+          {
+            "n": 5,
+            "p_n": 7,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 12,
+            "p_n": 77,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 19,
+            "p_n": 490,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 26,
+            "p_n": 2436,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 33,
+            "p_n": 10143,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 40,
+            "p_n": 37338,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 47,
+            "p_n": 124754,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          },
+          {
+            "n": 54,
+            "p_n": 386155,
+            "parseval_defect_crank": 0,
+            "parseval_defect_rank": 0
+          }
+        ],
+        "congruence_terms_checked": 23,
+        "crank_ranks_by_rem": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        "legendre_1_minus_24r": [
+          1,
+          -1,
+          1,
+          -1,
+          -1,
+          0,
+          1
+        ],
+        "legendre_selection_law_exact": true,
+        "n_limit": 160,
+        "palindromic_dim": 3,
+        "prime": 7,
+        "rank_ranks_by_rem": [
+          2,
+          1,
+          2,
+          1,
+          1,
+          0,
+          2
+        ]
+      }
+    },
+    "hickerson_7th_order_mock_theta_identities": {
+      "7k_plus_0_N0_minus_N2_eq_F0": true,
+      "7k_plus_2_N1_minus_N2_eq_F2": true,
+      "7k_plus_6_2N2_minus_N1_minus_N0_eq_qinv_F1": true,
+      "terms_verified": 22
+    },
+    "mod11_class6_shadow_certificate": {
+      "O5Q_householder_zero_residual_invariant": true,
+      "S_shadow_matrix_int": [
+        [
+          3248335,
+          11850788,
+          23187688,
+          33553608,
+          39741557
+        ],
+        [
+          11850788,
+          43270688,
+          84658090,
+          122513643,
+          145104936
+        ],
+        [
+          23187688,
+          84658090,
+          165633004,
+          239695192,
+          283895123
+        ],
+        [
+          33553608,
+          122513643,
+          239695192,
+          346876720,
+          410840197
+        ],
+        [
+          39741557,
+          145104936,
+          283895123,
+          410840197,
+          486598684
+        ]
+      ],
+      "inertia": [
+        5,
+        0,
+        0
+      ],
+      "leading_minor_bit_lengths": [
+        22,
+        37,
+        44,
+        48,
+        50
+      ],
+      "leading_principal_minors_all_positive": true,
+      "matrix_dim": 5,
+      "r_h4_ceil": 3,
+      "r_h4_str": "2581970951130937172927357874915284777151698/1273508333114676702506008911604171621991575",
+      "r_h4_x10000": 20274,
+      "r_opt_ceil": 2,
+      "r_opt_str": "1093336724459659761/1093329467864525137",
+      "r_opt_x10000": 10000,
+      "strictly_positive_definite": true
+    }
+  },
+  "part4_tau_and_cubic_theta_agm": {
+    "cubic_theta_agm": {
+      "a3_eq_b3_plus_c3": true,
+      "a_first_10": [
+        1,
+        6,
+        0,
+        6,
+        6,
+        0,
+        0,
+        12,
+        0,
+        6
+      ],
+      "agm_step1_3a_q3_eq_a_plus_2b": true,
+      "agm_step2_3b_q3_cubed_eq_b_a2_ab_b2": true,
+      "b_first_10": [
+        1,
+        -3,
+        0,
+        6,
+        -3,
+        0,
+        0,
+        -6,
+        0,
+        6
+      ],
+      "b_lattice_eq_eta_product": true,
+      "c3_lattice_eq_eta_product": true,
+      "c_tilde_first_10": [
+        3,
+        3,
+        6,
+        0,
+        6,
+        3,
+        6,
+        0,
+        3,
+        6
+      ],
+      "euler_witt_H10_rank_b": 3,
+      "euler_witt_H10_rank_c_tilde": 2,
+      "truncation_order": 100
+    },
+    "tau": {
+      "congruences": {
+        "mod_125_swinnerton_dyer_coprime_5": true,
+        "mod_2048_kolberg_all_odd_n": true,
+        "mod_23_wilton_inert_primes_zero": true,
+        "mod_23_wilton_split_primes_in_2_or_minus1": true,
+        "mod_691_sigma11_all_n": true,
+        "mod_729_swinnerton_dyer_coprime_3": true,
+        "mod_7_n_sigma3_all_n": true
+      },
+      "deligne_integer_bound_all_primes": true,
+      "first_12": [
+        1,
+        -24,
+        252,
+        -1472,
+        4830,
+        -6048,
+        -16744,
+        84480,
+        -113643,
+        -115920,
+        534612,
+        -370944
+      ],
+      "hecke_coprime_pairs_verified": 1143,
+      "hecke_prime_power_checks_verified": 19,
+      "lehmer_nonzero_all_n": true,
+      "max_sato_tate_ratio_exact": "12741344527718757576976/13842338707244455781047",
+      "max_sato_tate_ratio_prime": 103,
+      "max_sato_tate_ratio_x10000": 9204,
+      "primes_checked": 95,
+      "range_n": [
+        1,
+        500
+      ]
+    }
+  },
+  "part4_three_lab_lean4_forensics": {
+    "aletheia_version": "1.2.0",
+    "anthropics_flt_ramanujan_ode_clean": "2/2",
+    "dm_formal_conjectures_tau_public_import_and_tau2_sorry": true,
+    "files": [
+      {
+        "has_public_import": true,
+        "lines": 74,
+        "mathlib_clean": false,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "dm-math-formal-conjectures/FormalConjectures/Wikipedia/RamanujanTau.lean",
+        "sha256": "244c3ff758f92dc238473ac991e812e9320a712befe1d6f2b373d5f0a59f1767",
+        "sorry_count": 3,
+        "sorry_lines": [
+          60,
+          66,
+          71
+        ]
+      },
+      {
+        "has_public_import": true,
+        "lines": 213,
+        "mathlib_clean": false,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "dm-math-formal-conjectures/FormalConjectures/Paper/PartitionParity.lean",
+        "sha256": "4b5eae70b769168c3c78855b9e9ac0c5b9954daff260c2c225efd818aaf78017",
+        "sorry_count": 16,
+        "sorry_lines": [
+          70,
+          78,
+          85,
+          93,
+          101,
+          110,
+          117,
+          124,
+          131,
+          139,
+          148,
+          161,
+          179,
+          192,
+          199,
+          210
+        ]
+      },
+      {
+        "has_public_import": true,
+        "lines": 46,
+        "mathlib_clean": false,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "dm-math-formal-conjectures/FormalConjectures/Paper/Gourevitch.lean",
+        "sha256": "6a34c63b8423eb19a735654fd1e57d0ec4c5e98cb4be39b24d0bc7594e89c609",
+        "sorry_count": 1,
+        "sorry_lines": [
+          43
+        ]
+      },
+      {
+        "has_public_import": false,
+        "lines": 13,
+        "mathlib_clean": true,
+        "non_init_import_count": 3,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "anthropics-flt/Theorems/Thm_EisensteinSeries_ramanujan_system_qExpansion_int.lean",
+        "sha256": "fa0f9c946797c4d80d7cbc42cf592576fbd851f24449ed75db03143de585e1b0",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 683,
+        "mathlib_clean": true,
+        "non_init_import_count": 2,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "anthropics-flt/P2M/Sol/S_EisensteinSeries_ramanujan_system_qExpansion_int.lean",
+        "sha256": "f62574400807ef1504f90f4deec254e889316fa89d3a4d739a7d5f8c39a868a9",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 33,
+        "mathlib_clean": true,
+        "non_init_import_count": 2,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/CubicMoment/Theta/CubicThetaPrimeCubeRootRamanujan.lean",
+        "sha256": "187eb46eed9c9c0729c3e5967b95d3d580c8315108c7472a76c15df8c105795c",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 122,
+        "mathlib_clean": true,
+        "non_init_import_count": 3,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/CubicMoment/Theta/CubicThetaRamanujan.lean",
+        "sha256": "1fab2d240de1709371c9a6983f2e79b263425f2fb18b6be81d94c7e0ff150337",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 82,
+        "mathlib_clean": true,
+        "non_init_import_count": 2,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/CubicMoment/Theta/CubicThetaRamanujanProduct.lean",
+        "sha256": "6c30c42def96b1d21e56d099db2f84f9f40c0781ff96316be222ee15230c36ef",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 122,
+        "mathlib_clean": true,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/EgyptianFractions/RamanujanEuler.lean",
+        "sha256": "b065ed44f18da006c58988b2035a0391309d583893c87213267509f428458a8a",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 239,
+        "mathlib_clean": true,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/EgyptianFractions/RamanujanProduct.lean",
+        "sha256": "cf6dfd595d3f0addf4b62fb64b2bfc0694f735ffab5a0f659491d374517012b5",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 127,
+        "mathlib_clean": true,
+        "non_init_import_count": 2,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/EgyptianFractions/RamanujanSingularLimit.lean",
+        "sha256": "ec04f0abb182c9fd8c73b5f189baef2083861d9eb8b90b387071aa45dc1517f5",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 51,
+        "mathlib_clean": true,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/JointDickman/Amplification/RamanujanMultiplicative.lean",
+        "sha256": "386d4372ebf3af2dd52b54c1f334f48e594ff99af6ebe6d2f571d0168a03c6e2",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 83,
+        "mathlib_clean": true,
+        "non_init_import_count": 3,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/JointDickman/Amplification/RamanujanRoots.lean",
+        "sha256": "4e3d27faee72f765e524d63db19aae1c699d0256f446ccec67e47910dd148249",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 59,
+        "mathlib_clean": true,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/JointDickman/Amplification/RamanujanSum.lean",
+        "sha256": "77472113c0b97a5f40514847c5bd0354bedca0d99101bce1de2a3dbe890e1d67",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 54,
+        "mathlib_clean": true,
+        "non_init_import_count": 2,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/JointDickman/Amplification/RamanujanVanishing.lean",
+        "sha256": "61422a70953c3994f0706f2baf753bc4e851ee8cb0d2f3acc21260e8151bcad2",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 60,
+        "mathlib_clean": true,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/JointDickman/Arithmetic/RamanujanDivisorFormula.lean",
+        "sha256": "90acc8e5c3b9cd53986b055165a93fa5e25dc85357e3b50fd5bda6f38998b8f7",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 115,
+        "mathlib_clean": true,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/JointDickman/Probability/RamanujanResidueFactor.lean",
+        "sha256": "e9e04227bf8b2f574065553c1481e32ada83065122e858ee2c010d30ad092b8a",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 72,
+        "mathlib_clean": true,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/Ostmann/Characters/TensorRamanujanExpansion.lean",
+        "sha256": "cc68b912af0a6742edfe2485f5433d4369fa0dd0487535d72cc25c512fa330c5",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 84,
+        "mathlib_clean": true,
+        "non_init_import_count": 2,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/Ostmann/Characters/UnitRamanujanProduct.lean",
+        "sha256": "9a3dd18f6c5f20af8a8ab134928ba424c41f0a76962396767c8755ac9e7edc16",
+        "sorry_count": 0,
+        "sorry_lines": []
+      },
+      {
+        "has_public_import": false,
+        "lines": 40,
+        "mathlib_clean": true,
+        "non_init_import_count": 1,
+        "non_sorry_trust_escapes": [],
+        "repo_file": "openai-math/lean/OAI/NumberTheory/Ostmann/Supply/CenteredRamanujanKernel.lean",
+        "sha256": "595b3f6d6ce5074b43789aace9a03b7feaf36cbf8925db3bfd920d085727f8c7",
+        "sorry_count": 0,
+        "sorry_lines": []
+      }
+    ],
+    "openai_math_ramanujan_clean": "15/15",
+    "pinned_repo_commits": {
+      "anthropics-flt": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+      "dm-math-formal-conjectures": "d8d031d4998c78575159ccab9a7a9e95ce043883",
+      "openai-math": "4eaee87548250b2682affda7d05d947c05554bae"
+    },
+    "total_lean_files_audited": 20
+  },
+  "part5_r3_negative_controls": {
+    "all_rejected": true,
+    "controls_passed": 11,
+    "controls_total": 11,
+    "details": {
+      "reject_asymmetric_matrix_inertia": "REJECTED:ValueError",
+      "reject_bool_in_exact_int": "REJECTED:TypeError",
+      "reject_bool_in_exact_rational": "REJECTED:TypeError",
+      "reject_float_in_exact_int": "REJECTED:TypeError",
+      "reject_float_in_exact_rational": "REJECTED:TypeError",
+      "reject_float_in_json_guard": "REJECTED:ValueError",
+      "reject_invalid_modulus_rank_crank": "REJECTED:ValueError",
+      "reject_nonsquare_matrix_inertia": "REJECTED:ValueError",
+      "reject_nonunit_constant_q_inv": "REJECTED:ValueError",
+      "reject_zero_constant_euler_witt": "REJECTED:ValueError",
+      "reject_zero_constant_q_inv": "REJECTED:ValueError"
+    }
+  },
+  "probe_id": "AUDIT-045",
+  "title": "Ramanujan Mock Modular Shadows, Rank-Crank Schur Obstructions, 4-Tier Hankel/Euler-Witt Filtration & 3-Lab Lean 4 Forensics",
+  "zero_floats_certified": true
+}
