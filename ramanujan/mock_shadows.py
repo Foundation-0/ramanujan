@@ -1761,12 +1761,21 @@ def run_all_probes(write_certificate: bool = False) -> dict[str, Any]:
     part4_lean = run_three_lab_lean4_audit()
     part5_r3 = run_r3_negative_controls()
 
+    all_passed = bool(
+        part1["identities_all_verified"]
+        and part2["law3_additive_hankel_refutation"]["theta3_vs_partial_theta_shifted_H12_exact_ratio_2"]
+        and part2["tier3_ramanujan_ode_all_exact_zero_residual"]
+        and part4_math["tau"]["lehmer_nonzero_all_n"]
+        and part4_math["cubic_theta_agm"]["a3_eq_b3_plus_c3"]
+        and part5_r3["all_rejected"]
+    )
     payload: dict[str, Any] = {
         "probe_id": "AUDIT-045",
         "arm": "R4-2",
         "title": "Ramanujan Mock Modular Shadows, Rank-Crank Schur Obstructions, 4-Tier Hankel/Euler-Witt Filtration & 3-Lab Lean 4 Forensics",
         "oracle_class": "exact+anchor",
         "honest_novelty_claim": "N1",
+        "all_passed": all_passed,
         "zero_floats_certified": True,
         "part1_mock_theta_and_appell_lerch": part1,
         "part2_four_tier_hankel_euler_witt_filtration": part2,

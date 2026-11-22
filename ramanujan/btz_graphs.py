@@ -16,8 +16,12 @@ Strict Law-4 Prior-Art Quarantine (N0 — cited, never claimed new):
   Conway-Sloane (SPLAG), Ramanujan (1916), Deligne (1974), Cheng-Duncan-Harvey (2014).
 
 Standards:
-- Pure Python stdlib + numpy (numpy used ONLY for Part C2 sampled G & 160x24 quantization
-  benchmarks; Parts A, B, C1, D are 100% pure Fraction/int with ZERO floats!).
+- Pure Python stdlib for Parts A, B, C1, and D (100% exact `int`/`Fraction`, ZERO floats,
+  ZERO third-party imports).
+- Optional `numpy` (lazy-imported ONLY inside Part C2 for the sampled float64 Monte Carlo G
+  estimator and 400x24 Gaussian safe-scale quantization benchmark, using explicit float
+  tolerances 1e-12, 1e-6, 1e-9). When `numpy` is unavailable (or `include_sampled=False`),
+  Part C2 is explicitly skipped and Parts A, B, C1, D complete with 0 floats.
 - Zero bare `assert`s; 4-mode isolated `-I` deterministic replay; 8/8 built-in R5 controls.
 """
 
@@ -31,8 +35,6 @@ import sys
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
-
-import numpy as np
 
 
 # =============================================================================
@@ -813,7 +815,13 @@ def exact_theta_e4_and_tau(max_m: int) -> tuple[list[int], list[int], list[int]]
     return e4_3, tau, leech
 
 
-def _decode_dn_batch(x: np.ndarray) -> np.ndarray:
+def _require_numpy() -> Any:
+    import numpy as np
+    return np
+
+
+def _decode_dn_batch(x: Any) -> Any:
+    np = _require_numpy()
     z = np.rint(x)
     odd = (np.sum(z.astype(np.int64), axis=-1) & 1) != 0
     if np.any(odd):
@@ -826,8 +834,9 @@ def _decode_dn_batch(x: np.ndarray) -> np.ndarray:
     return z
 
 
-def decode_dn_plus_batch(x: np.ndarray) -> np.ndarray:
+def decode_dn_plus_batch(x: Any) -> Any:
     """Exact nearest-point decoder for even unimodular D_{8k}^+ (E8=D8+, D16+, D24+)."""
+    np = _require_numpy()
     c1 = _decode_dn_batch(x)
     c2 = _decode_dn_batch(x - 0.5) + 0.5
     d1 = np.sum((x - c1) ** 2, axis=-1, keepdims=True)
@@ -835,18 +844,19 @@ def decode_dn_plus_batch(x: np.ndarray) -> np.ndarray:
     return np.where(d1 <= d2, c1, c2)
 
 
-def decode_d16p_e8_batch(x: np.ndarray) -> np.ndarray:
+def decode_d16p_e8_batch(x: Any) -> Any:
     """Exact nearest-point decoder for Niemeier lattice D16+ (+) E8 (isospectral twin of E8^3!)."""
+    np = _require_numpy()
     q16 = decode_dn_plus_batch(x[:, :16])
     q8 = decode_dn_plus_batch(x[:, 16:])
     return np.concatenate([q16, q8], axis=-1)
 
 
-def decode_e8x3_batch(x: np.ndarray) -> np.ndarray:
+def decode_e8x3_batch(x: Any) -> Any:
     return decode_dn_plus_batch(x.reshape(-1, 8)).reshape(x.shape)
 
 
-def run_part_c_niemeier_24_and_quantization() -> dict[str, Any]:
+def run_part_c_niemeier_24_and_quantization(include_sampled: bool = True) -> dict[str, Any]:
     require(len(NIEMEIER_24) == 24, "NIEMEIER_COUNT", "Must have exactly 24 Niemeier lattices")
     max_m = 214
     e4_3, tau, leech = exact_theta_e4_and_tau(max_m)
@@ -898,16 +908,50 @@ def run_part_c_niemeier_24_and_quantization() -> dict[str, Any]:
     isospectral_pairs = [sorted(names) for h_val, names in sorted(by_h.items()) if len(names) > 1]
     require(len(isospectral_pairs) == 5, "ISO_PAIRS_ERR", f"Expected 5 isospectral Niemeier pairs, got {isospectral_pairs}")
 
-    # Exact-decoder comparison of 4 unimodular 24D Niemeier lattices:
+    base_exact: dict[str, Any] = {
+        "niemeier_count_verified": 24,
+        "five_exact_isospectral_pairs": isospectral_pairs,
+        "ramanujan_tau_partial_sum_sign_census_m1_214": {
+            "positive_count": sum(1 for m in range(1, max_m + 1) if t_sum[m] > 0),
+            "negative_count": sum(1 for m in range(1, max_m + 1) if t_sum[m] < 0),
+            "zero_count": sum(1 for m in range(1, max_m + 1) if t_sum[m] == 0),
+            "T_1": t_sum[1],
+            "T_2": t_sum[2],
+            "T_13": t_sum[13],
+            "T_53": t_sum[53],
+            "T_214": t_sum[214],
+        },
+        "universal_ball_cap_invariance_all_24_niemeier": universal_mcaps,
+    }
+
+    if not include_sampled:
+        return {
+            "oracle_class": "exact",
+            "sampled_benchmark_executed": False,
+            "sampled_benchmark_status": "skipped_exact_only",
+            **base_exact,
+        }
+
+    try:
+        np = _require_numpy()
+    except ImportError:
+        return {
+            "oracle_class": "exact",
+            "sampled_benchmark_executed": False,
+            "sampled_benchmark_status": "skipped_optional_numpy_unavailable",
+            **base_exact,
+        }
+
+    # Optional Part C2 sampled float64 benchmark (seeded numpy, explicit float tolerances 1e-12/1e-6/1e-9):
     # Lambda_24 (r=0, rho^2=2, G=0.065771), D16+ (+) E8 (r=720, rho^2=3), E8^3 (r=720, rho^2=3), D24+ (r=1104, rho^2=3)
     rng = np.random.default_rng(20260401)
-    # Exact unbiased G on fundamental-cell union [0, 2)^24 (2^{23} cells for D24+ & D16+E8 & E8^3)
+    # Sampled unbiased G on fundamental-cell union [0, 2)^24 (2^{23} cells for D24+ & D16+E8 & E8^3)
     n_mc = 30000
     u24 = rng.uniform(0.0, 2.0, size=(n_mc, 24))
     g_e8x3 = float(np.mean(np.sum((u24 - decode_e8x3_batch(u24)) ** 2, axis=-1))) / 24.0
     g_d16e8 = float(np.mean(np.sum((u24 - decode_d16p_e8_batch(u24)) ** 2, axis=-1))) / 24.0
     g_d24p = float(np.mean(np.sum((u24 - decode_dn_plus_batch(u24)) ** 2, axis=-1))) / 24.0
-    # Verify exact deep holes: (1/2^8, 0^8) + (1/2^4, 0^4) for D16+E8 => rho^2=3; (1/2^12, 0^12) for D24+ => rho^2=3
+    # Deep-hole check (float64 tolerance 1e-12): (1/2^8, 0^8) + (1/2^4, 0^4) for D16+E8 => rho^2=3; (1/2^12, 0^12) for D24+ => rho^2=3
     h_d24 = np.array([[0.5] * 12 + [0.0] * 12])
     rho2_d24 = float(np.sum((h_d24 - decode_dn_plus_batch(h_d24)) ** 2))
     h_d16e8 = np.array([[0.5] * 8 + [0.0] * 8 + [0.5] * 4 + [0.0] * 4])
@@ -958,19 +1002,9 @@ def run_part_c_niemeier_24_and_quantization() -> dict[str, Any]:
 
     return {
         "oracle_class": "exact+sampled",
-        "niemeier_count_verified": 24,
-        "five_exact_isospectral_pairs": isospectral_pairs,
-        "ramanujan_tau_partial_sum_sign_census_m1_214": {
-            "positive_count": sum(1 for m in range(1, max_m + 1) if t_sum[m] > 0),
-            "negative_count": sum(1 for m in range(1, max_m + 1) if t_sum[m] < 0),
-            "zero_count": sum(1 for m in range(1, max_m + 1) if t_sum[m] == 0),
-            "T_1": t_sum[1],
-            "T_2": t_sum[2],
-            "T_13": t_sum[13],
-            "T_53": t_sum[53],
-            "T_214": t_sum[214],
-        },
-        "universal_ball_cap_invariance_all_24_niemeier": universal_mcaps,
+        "sampled_benchmark_executed": True,
+        "sampled_benchmark_status": "executed_numpy_float64",
+        **base_exact,
         "unbiased_G_and_rho2_comparison": {
             "Leech24_r0_exact_rho2": 2,
             "Leech24_r0_ref_G_AUDIT028": 0.065771,
@@ -1050,15 +1084,22 @@ def run_part_d_r5_controls() -> dict[str, Any]:
 # 6. Main Driver
 # =============================================================================
 
-def run_all() -> dict[str, Any]:
+def run_all(include_sampled: bool = True) -> dict[str, Any]:
     part_ab1 = run_parts_a_and_b1_regular_cohomology()
     part_b2 = run_part_b2_btz_wormhole_holonomy()
-    part_c = run_part_c_niemeier_24_and_quantization()
+    part_c = run_part_c_niemeier_24_and_quantization(include_sampled=include_sampled)
     part_d = run_part_d_r5_controls()
 
+    all_passed = bool(
+        part_c["niemeier_count_verified"] == 24
+        and len(part_c["five_exact_isospectral_pairs"]) == 5
+        and part_d["controls_passed"] == part_d["controls_total"]
+        and part_d["controls_total"] == 8
+    )
     payload: dict[str, Any] = {
         "schema": "aletheia.wave2.round4.ramanujan_btz_graphs.v1",
-        "verdict": "ALL_RAMANUJAN_BTZ_NIEMEIER_PARTS_VERIFIED",
+        "all_passed": all_passed,
+        "verdict": "ALL_RAMANUJAN_BTZ_NIEMEIER_PARTS_VERIFIED" if all_passed else "FAILED",
         "parts_a_b1_ramanujan_cohomology_sweep": part_ab1,
         "part_b2_btz_wormhole_holonomy_parity": part_b2,
         "part_c_niemeier_24_and_quantization": part_c,
@@ -1071,13 +1112,14 @@ def run_all() -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Zero-float integer Ramanujan certifier, H^1(G, Z_2) BTZ wormhole sweep & 24 Niemeier lattice verifier"
+        description="Exact integer Ramanujan certifier, H^1(G, Z_2) BTZ wormhole sweep & 24 Niemeier lattice verifier (optional sampled Part C2)"
     )
     parser.add_argument("--json", action="store_true", help="Emit canonical JSON to stdout")
+    parser.add_argument("--exact-only", action="store_true", help="Skip optional numpy float64 Part C2 quantization benchmark")
     parser.add_argument("--write-cert", type=Path, default=None, help="Write JSON certificate to path")
     args = parser.parse_args()
 
-    result = run_all()
+    result = run_all(include_sampled=not args.exact_only)
     text = json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n"
     if args.write_cert is not None:
         args.write_cert.write_text(text, encoding="utf-8")
@@ -1089,7 +1131,7 @@ def main() -> int:
         print(f"Total H^1(G, Z_2) classes certified zero-float: {result['parts_a_b1_ramanujan_cohomology_sweep']['total_h1_z2_classes_exhaustively_certified']}")
         print(f"24 Niemeier universal m_caps: {result['part_c_niemeier_24_and_quantization']['universal_ball_cap_invariance_all_24_niemeier']}")
         print(f"R5 Controls: {result['part_d_r5_controls']['controls_passed']}/{result['part_d_r5_controls']['controls_total']}")
-    return 0
+    return 0 if result["all_passed"] else 1
 
 
 if __name__ == "__main__":

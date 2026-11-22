@@ -153,12 +153,54 @@ def run_all_tests() -> int:
     require_cond(p2["tropical_cochain_peeling_w3"]["strong_duality_exact_match"] is True and p2["tropical_cochain_peeling_w3"]["strict_separation_3_2_lt_2"] is True, "W=3 peeling 3/2 < 2")
 
     p3 = rep["pillar_3_ramanujan_master_mellin_summation"]
+    require_cond(rep["all_passed"] is True and rep["epistemic_status"] == "VERIFIED", "pgl2_mellin all_passed & VERIFIED")
     require_cond(p3["bernoulli_two_oracle_exact_match"] is True and p3["faulhaber_polynomial_exact_k0_to_k5"] is True, "Bernoulli & Faulhaber")
     require_cond(p3["shift_anomaly_theorem"]["all_exact_int_0_1_x_pow_k"] is True, "Shift anomaly exact")
     require_cond(p3["regulator_net_equalizer"]["const_term_invariant_across_all_4_nets_k0_to_k5"] is True, "Regulator equalizer inv")
     require_cond(p3["regulator_net_equalizer"]["divergent_poles_differ_across_nets"] is True, "Poles differ across nets")
     require_cond(p3["regulator_net_equalizer"]["shifted_cutoff_breakage_exact"] is True, "Shifted cutoff breakage exact")
-    require_cond(p3["ramanujan_master_theorem"]["all_4_families_residue_parity_exact"] is True and p3["ramanujan_master_theorem"]["mellin_scale_equivariance_exact"] is True, "RMT & Mellin scale equiv")
+    require_cond(
+        p3["ramanujan_master_theorem"]["all_4_families_residue_parity_exact"] is True
+        and p3["ramanujan_master_theorem"]["mellin_scale_equivariance_exact"] is True
+        and p3["ramanujan_master_theorem"]["mellin_negative_controls_all_rejected"] is True,
+        "RMT & non-tautological Mellin scale equiv + negative controls",
+    )
+    # Verify independent (1+x)^(-3/2) series satisfies f(x)^2 * (1+x)^3 == 1 mod x^10
+    f_binom = rpm._ps_inv_sqrt_cube_1_plus_x(10)
+    one_plus_x = [Fraction(1), Fraction(1)] + [Fraction(0)] * 8
+    prod_id = rpm.ps_mul(rpm.ps_mul(f_binom, f_binom, 10), rpm.ps_pow(one_plus_x, 3, 10), 10)
+    require_cond(prod_id == [Fraction(1)] + [Fraction(0)] * 9, "f^2 * (1+x)^3 == 1 exact")
+    # Direct Mellin scale-equivariance input guards, boundary checks & must-fail controls
+    expect_raises(ValueError, lambda: rpm._validate_positive_fraction(Fraction(0)), "lam == 0", match="lam")
+    expect_raises(ValueError, lambda: rpm._validate_positive_fraction(Fraction(-1, 2)), "lam < 0", match="lam")
+    expect_raises(ValueError, lambda: rpm._validate_positive_fraction(1), "lam non-Fraction", match="lam")
+    expect_raises(ValueError, lambda: rpm._validate_pos_s(0), "s < 1", match="strict int")
+    expect_raises(ValueError, lambda: rpm._validate_pos_s(True), "s bool", match="strict int")
+    expect_raises(ValueError, lambda: rpm._validate_beta_ks(6, 0), "beta s < 1", match="1 <= s < k_exp")
+    expect_raises(ValueError, lambda: rpm._validate_beta_ks(6, 6), "beta s == k_exp", match="1 <= s < k_exp")
+    expect_raises(ValueError, lambda: rpm._validate_beta_ks(True, 1), "beta k bool", match="1 <= s < k_exp")
+    # Length == 2 rejected and length == 3 boundary accepted for both RMT series extractors
+    exp_len3 = [Fraction(1), Fraction(-2), Fraction(2)]
+    require_cond(rpm._rmt_mellin_from_dilated_exp_series(exp_len3, 1) == Fraction(1, 2), "exp RMT len==3 boundary ok")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_exp_series([Fraction(1), Fraction(-2)], 1), "exp len < 3", match="length >= 3")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_exp_series([Fraction(0), Fraction(-1), Fraction(1)], 1), "exp phi0 == 0", match="leading RMT")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_exp_series([Fraction(1), Fraction(0), Fraction(0)], 1), "exp ratio == 0", match="positive")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_exp_series([Fraction(1), Fraction(1), Fraction(1, 2)], 1), "exp ratio < 0", match="positive")
+    beta_len3 = [Fraction(1), Fraction(-6), Fraction(21)]
+    require_cond(rpm._rmt_mellin_from_dilated_beta_series(beta_len3, 6, 1) == Fraction(1, 5), "beta RMT len==3 boundary ok")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_beta_series([Fraction(1), Fraction(-6)], 6, 1), "beta len < 3", match="length >= 3")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_beta_series([Fraction(0), Fraction(-6), Fraction(21)], 6, 1), "beta phi0 == 0", match="leading RMT")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_beta_series([Fraction(1), Fraction(0), Fraction(0)], 6, 1), "beta ratio == 0", match="positive")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_beta_series([Fraction(1), Fraction(6), Fraction(21)], 6, 1), "beta ratio < 0", match="positive")
+    expect_raises(ValueError, lambda: rpm._rmt_mellin_from_dilated_beta_series([Fraction(1), Fraction(-6), Fraction(20)], 6, 1), "beta corrupt Pochhammer step", match="Pochhammer")
+
+    expect_raises(ValueError, lambda: rpm.verify_mellin_scale_equivariance(Fraction(0)), "lam <= 0", match="lam")
+    expect_raises(ValueError, lambda: rpm.verify_mellin_scale_equivariance(Fraction(7, 3), max_s=0), "max_s < 1", match="max_s")
+    expect_raises(ValueError, lambda: rpm.verify_mellin_scale_equivariance(Fraction(7, 3), max_s=6), "max_s > 5", match="max_s")
+    expect_raises(ValueError, lambda: rpm.verify_mellin_scale_equivariance(Fraction(7, 3), scale_exponent_sign=0), "bad sign", match="sign")
+    expect_raises(ValueError, lambda: rpm.verify_mellin_scale_equivariance(Fraction(7, 3), corrupt_series_c1=Fraction(1, 5)), "corrupt series rejected", match="ratio")
+    require_cond(rpm.verify_mellin_scale_equivariance(Fraction(7, 3), scale_exponent_sign=1)["all_exact"] is False, "wrong sign fails")
+    require_cond(rpm.verify_mellin_scale_equivariance(Fraction(7, 3), scale_exponent_shift=1)["all_exact"] is False, "shifted exp fails")
     groups += 1
 
     return groups
