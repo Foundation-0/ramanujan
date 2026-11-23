@@ -847,6 +847,198 @@ def _laurent_const_term_fk(k: int, lam: Fraction, b_nums: Sequence[Fraction]) ->
     return pole_coeff, const_term
 
 
+def _ps_inv_sqrt_cube_1_plus_x(mod: int) -> Poly:
+    """Compute exact Taylor series of f(x) = (1 + x)^(-3/2) mod x^mod by solving
+    f(x)^2 * (1 + x)^3 == 1 in Q[[x]] coefficient-by-coefficient (zero use of Pochhammer)."""
+    _validate_mod(mod)
+    one_plus_x = [Fraction(0, 1)] * mod
+    one_plus_x[0] = Fraction(1, 1)
+    if mod > 1:
+        one_plus_x[1] = Fraction(1, 1)
+    target = ps_inv(ps_pow(one_plus_x, 3, mod), mod)
+    f = [Fraction(0, 1)] * mod
+    f[0] = Fraction(1, 1)
+    for n in range(1, mod):
+        cross = Fraction(0, 1)
+        for j in range(1, n):
+            cross += f[j] * f[n - j]
+        f[n] = (target[n] - cross) / Fraction(2, 1)
+    return f
+
+
+def _validate_positive_fraction(lam: Any) -> None:
+    if not isinstance(lam, Fraction) or lam <= 0:
+        raise ValueError("lam must be positive Fraction")
+
+
+def _validate_pos_s(s: Any) -> None:
+    if type(s) is not int or s < 1:
+        raise ValueError("s must be strict int >= 1")
+
+
+def _validate_beta_ks(k_exp: Any, s: Any) -> None:
+    if type(k_exp) is not int or type(s) is not int or s < 1 or s >= k_exp:
+        raise ValueError("requires strict ints 1 <= s < k_exp")
+
+
+def _dilate_series(coeffs: Sequence[Fraction], lam: Fraction) -> Poly:
+    """Apply exact dilation operator (D_lam f)(x) = f(lam * x) to truncated power series."""
+    _validate_positive_fraction(lam)
+    out: Poly = []
+    pw = Fraction(1, 1)
+    for c in coeffs:
+        out.append(c * pw)
+        pw *= lam
+    return out
+
+
+def _mellin_exp_moment_by_parts(lam: Fraction, s: int) -> Fraction:
+    """Direct integration-by-parts recurrence for M{exp(-lam*x)}(s) = int_0^inf x^{s-1} exp(-lam*x) dx.
+
+    Base: M(1) = [-exp(-lam*x)/lam]_0^inf = 1/lam.
+    Step: M(s) = ((s - 1) / lam) * M(s - 1) for s >= 2.
+    Independent of Gamma(s) and Ramanujan Master Theorem phi(-s).
+    """
+    _validate_positive_fraction(lam)
+    _validate_pos_s(s)
+    val = Fraction(1, 1) / lam
+    for k in range(2, s + 1):
+        val = val * Fraction(k - 1, 1) / lam
+    return val
+
+
+def _mellin_beta_moment_by_parts(lam: Fraction, k_exp: int, s: int) -> Fraction:
+    """Direct integration-by-parts recurrence for M{(1 + lam*x)^(-k)}(s) for 1 <= s < k.
+
+    Base: int_0^inf (1 + lam*x)^(-k) dx = 1 / ((k - 1) * lam).
+    Step: I_k(lam, s) = ((s - 1) / ((k - s) * lam)) * I_k(lam, s - 1).
+    """
+    _validate_positive_fraction(lam)
+    _validate_beta_ks(k_exp, s)
+    val = Fraction(1, k_exp - 1) / lam
+    for m in range(2, s + 1):
+        val = val * Fraction(m - 1, k_exp - m) / lam
+    return val
+
+
+def _rmt_mellin_from_dilated_exp_series(
+    dilated_coeffs: Sequence[Fraction],
+    s: int,
+) -> Fraction:
+    """Extract phi_lam(n) = (-1)^n * n! * [x^n] f(lam*x) from the dilated series itself,
+    verify its exact geometric ratio r = phi_lam(n+1)/phi_lam(n) across all terms,
+    and evaluate Ramanujan Master Theorem M_RMT(s) = Gamma(s) * phi_lam(-s) = (s-1)! * phi_lam(0) * r^(-s)."""
+    _validate_pos_s(s)
+    if len(dilated_coeffs) < 3:
+        raise ValueError("dilated_coeffs must have length >= 3")
+    phis = [
+        Fraction((-1) ** n * factorial(n), 1) * dilated_coeffs[n]
+        for n in range(len(dilated_coeffs))
+    ]
+    if phis[0] == 0:
+        raise ValueError("leading RMT coefficient phi(0) must be nonzero")
+    ratio = phis[1] / phis[0]
+    if ratio <= 0:
+        raise ValueError("exponential dilation ratio must be positive")
+    for n in range(1, len(phis) - 1):
+        if phis[n] == 0 or (phis[n + 1] / phis[n]) != ratio:
+            raise ValueError(f"dilated series violates constant exponential RMT ratio at n={n}")
+    return Fraction(factorial(s - 1), 1) * phis[0] * (ratio ** (-s))
+
+
+def _rmt_mellin_from_dilated_beta_series(
+    dilated_coeffs: Sequence[Fraction],
+    k_exp: int,
+    s: int,
+) -> Fraction:
+    """Extract phi_lam(n) = (-1)^n * n! * [x^n] (1 + lam*x)^(-k) from the dilated series,
+    verify the exact Pochhammer step phi_lam(n+1)/phi_lam(n) == (k + n) * r across all terms,
+    and evaluate M_RMT(s) = Gamma(s) * phi_lam(-s) = ((s-1)!(k-1-s)!/(k-1)!) * phi_lam(0) * r^(-s)."""
+    _validate_beta_ks(k_exp, s)
+    if len(dilated_coeffs) < 3:
+        raise ValueError("dilated_coeffs must have length >= 3")
+    phis = [
+        Fraction((-1) ** n * factorial(n), 1) * dilated_coeffs[n]
+        for n in range(len(dilated_coeffs))
+    ]
+    if phis[0] == 0:
+        raise ValueError("leading RMT coefficient phi(0) must be nonzero")
+    ratio = phis[1] / (Fraction(k_exp, 1) * phis[0])
+    if ratio <= 0:
+        raise ValueError("beta dilation ratio must be positive")
+    for n in range(1, len(phis) - 1):
+        if phis[n] == 0 or (phis[n + 1] / phis[n]) != Fraction(k_exp + n, 1) * ratio:
+            raise ValueError(f"dilated series violates Pochhammer RMT step at n={n}")
+    beta_base = Fraction(factorial(s - 1) * factorial(k_exp - 1 - s), factorial(k_exp - 1))
+    return beta_base * phis[0] * (ratio ** (-s))
+
+
+def verify_mellin_scale_equivariance(
+    lam: Fraction,
+    max_s: int = 5,
+    *,
+    scale_exponent_sign: int = -1,
+    scale_exponent_shift: int = 0,
+    corrupt_series_c1: Fraction = Fraction(0, 1),
+) -> Dict[str, Any]:
+    """Three-way independent exact-Q Mellin scale-equivariance certifier for D_lam f(x) = f(lam*x).
+
+    Compares, without algebraic tautologies:
+      (1) Direct integration-by-parts moment M_ibp{D_lam f}(s),
+      (2) Series-extracted RMT evaluation Gamma(s) * phi_lam(-s) from D_lam(Taylor(f)),
+      (3) Scale law lam^(sign * s + shift) * M_ibp{f}(s),
+    across both exponential f(x) = exp(-x) and rational Beta f(x) = (1 + x)^(-6) families.
+    """
+    _validate_positive_fraction(lam)
+    if type(max_s) is not int or max_s < 1 or max_s > 5:
+        raise ValueError("max_s must be strict int in 1..5")
+    if scale_exponent_sign not in (-1, 1) or type(scale_exponent_shift) is not int:
+        raise ValueError("invalid exponent sign or shift")
+
+    mod = max_s + 3
+    exp_base = _exp_neg_series(Fraction(1, 1), mod)
+    exp_dil = _dilate_series(exp_base, lam)
+    if corrupt_series_c1 != 0:
+        exp_dil[1] += corrupt_series_c1
+
+    k_beta = 6
+    one_plus_x = [Fraction(0, 1)] * mod
+    one_plus_x[0] = Fraction(1, 1)
+    one_plus_x[1] = Fraction(1, 1)
+    beta_base = ps_inv(ps_pow(one_plus_x, k_beta, mod), mod)
+    beta_dil = _dilate_series(beta_base, lam)
+
+    exp_all_ok = True
+    beta_all_ok = True
+    exp_samples: Dict[str, str] = {}
+    beta_samples: Dict[str, str] = {}
+    for s in range(1, max_s + 1):
+        scale_factor = lam ** (scale_exponent_sign * s + scale_exponent_shift)
+
+        m_exp_ibp = _mellin_exp_moment_by_parts(lam, s)
+        m_exp_rmt = _rmt_mellin_from_dilated_exp_series(exp_dil, s)
+        m_exp_scaled = scale_factor * _mellin_exp_moment_by_parts(Fraction(1, 1), s)
+        if not (m_exp_ibp == m_exp_rmt and m_exp_ibp == m_exp_scaled):
+            exp_all_ok = False
+        exp_samples[f"s={s}"] = str(m_exp_ibp)
+
+        m_beta_ibp = _mellin_beta_moment_by_parts(lam, k_beta, s)
+        m_beta_rmt = _rmt_mellin_from_dilated_beta_series(beta_dil, k_beta, s)
+        m_beta_scaled = scale_factor * _mellin_beta_moment_by_parts(Fraction(1, 1), k_beta, s)
+        if not (m_beta_ibp == m_beta_rmt and m_beta_ibp == m_beta_scaled):
+            beta_all_ok = False
+        beta_samples[f"s={s}"] = str(m_beta_ibp)
+
+    return {
+        "lam": str(lam),
+        "exp_3way_exact": exp_all_ok,
+        "beta_k6_3way_exact": beta_all_ok,
+        "all_exact": exp_all_ok and beta_all_ok,
+        "exp_moments": exp_samples,
+        "beta_k6_moments": beta_samples,
+    }
+
+
 def audit_ramanujan_master_and_summation() -> Dict[str, Any]:
     b_nums = exact_bernoulli_numbers(12)
     # Exact zeta(-k) for k = 0..5 (independently cross-checked by direct Laurent multiplication!)
@@ -957,50 +1149,62 @@ def audit_ramanujan_master_and_summation() -> Dict[str, Any]:
             "equals_neg_1_12": (const_shifted == Fraction(-1, 12)),
         })
 
-    # 4. Exact Q Ramanujan Master Theorem Residue Parity & Mellin Scale Equivariance
-    #    For f(x) = sum_{n>=0} (phi(n)/n!) (-x)^n, Res_{s=-n}(Gamma(s)*phi(-s)) == ((-1)^n / n!) * phi(n) == [x^n] f(x).
-    #    Verify across 4 exact rational families + Mellin scaling M{f(lam*x)}(s) = lam^{-s} M{f}(s) at s=1,2,3!
+    # 4. Exact Q Ramanujan Master Theorem Residue Parity & Non-Tautological Mellin Scale Equivariance
+    #    For each family, [x^n] f(x) is computed INDEPENDENTLY via power-series / ODE / algebraic
+    #    equations (never from phi_fn), then compared against Res_{s=-n}(Gamma(s)*phi(-s)) = ((-1)^n / n!) * phi(n).
     def _falling_poch_ratio(alpha: Fraction, n: int) -> Fraction:
-        # Gamma(n + alpha) / Gamma(alpha) = alpha * (alpha + 1) * ... * (alpha + n - 1)
         acc = Fraction(1, 1)
         for j in range(n):
             acc *= (alpha + Fraction(j, 1))
         return acc
 
-    rmt_families: Dict[str, Tuple[Callable[[int], Fraction], Callable[[int], Fraction]]] = {
-        "exp_neg_x": (lambda n: Fraction(1, 1), lambda n: Fraction((-1) ** n, factorial(n))),
-        "binomial_1_plus_x_neg_3_2": (
-            lambda n: _falling_poch_ratio(Fraction(3, 2), n),
-            lambda n: Fraction((-1) ** n, factorial(n)) * _falling_poch_ratio(Fraction(3, 2), n),
-        ),
-        "sinc_exp_1_minus_exp_over_x": (
-            lambda n: Fraction(1, n + 1),
-            lambda n: Fraction((-1) ** n, factorial(n + 1)),
-        ),
-        "scaled_exp_neg_7_3_x": (
-            lambda n: Fraction(7, 3) ** n,
-            lambda n: (Fraction(-7, 3) ** n) / Fraction(factorial(n), 1),
-        ),
+    mod_rmt = 10
+    exp1_ser = _exp_neg_series(Fraction(1, 1), mod_rmt + 1)
+    binom_inv_3_2_ser = _ps_inv_sqrt_cube_1_plus_x(mod_rmt)
+    # Independent ODE recurrence for f(x) = exp(-(7/3)x): f'(x) = -(7/3) f(x) => n*c[n] = -(7/3)*c[n-1]
+    scaled_exp_ser = [Fraction(1, 1)]
+    for n in range(1, mod_rmt):
+        scaled_exp_ser.append(scaled_exp_ser[-1] * Fraction(-7, 3) / Fraction(n, 1))
+    # Independent shift for (1 - exp(-x)) / x: [x^n] = -[x^{n+1}] exp(-x)
+    sinc_exp_ser = [-exp1_ser[n + 1] for n in range(mod_rmt)]
+
+    rmt_families: Dict[str, Tuple[Callable[[int], Fraction], Poly]] = {
+        "exp_neg_x": (lambda n: Fraction(1, 1), exp1_ser[:mod_rmt]),
+        "binomial_1_plus_x_neg_3_2": (lambda n: _falling_poch_ratio(Fraction(3, 2), n), binom_inv_3_2_ser),
+        "sinc_exp_1_minus_exp_over_x": (lambda n: Fraction(1, n + 1), sinc_exp_ser),
+        "scaled_exp_neg_7_3_x": (lambda n: Fraction(7, 3) ** n, scaled_exp_ser),
     }
     rmt_all_exact = True
     rmt_summary: Dict[str, Any] = {}
-    for fname, (phi_fn, taylor_fn) in rmt_families.items():
+    for fname, (phi_fn, indep_taylor) in rmt_families.items():
         res_ok = all(
-            (Fraction((-1) ** n, factorial(n)) * phi_fn(n) == taylor_fn(n)) for n in range(10)
+            (Fraction((-1) ** n, factorial(n)) * phi_fn(n) == indep_taylor[n]) for n in range(mod_rmt)
         )
         rmt_all_exact = rmt_all_exact and res_ok
         rmt_summary[fname] = {
-            "first_6_residues_eq_taylor": [str(taylor_fn(n)) for n in range(6)],
+            "first_6_residues_eq_taylor": [str(indep_taylor[n]) for n in range(6)],
             "exact_parity_n_0_to_9": res_ok,
         }
 
-    # Exact Mellin scale equivariance at integer s=1,2,3,4 for f(x) = exp(-x) -> f(lam*x) = exp(-lam*x):
-    # M{D_lam f}(s) = Gamma(s) * phi_lam(-s) = (s-1)! * lam^{-s} == lam^{-s} * M{f}(s)
-    lam_m = Fraction(7, 3)
-    mellin_scale_equiv = all(
-        (Fraction(factorial(s - 1), 1) * (lam_m ** (-s)) == (lam_m ** (-s)) * Fraction(factorial(s - 1), 1))
-        and (Fraction(factorial(s - 1), 1) * (Fraction(1, 1) / (lam_m ** s)) == Fraction(factorial(s - 1), 1) / (lam_m ** s))
-        for s in range(1, 6)
+    # Three-way independent Mellin scale equivariance across lam in {7/3, 2/5, 5/1} and s=1..5
+    # plus built-in must-fail negative controls (wrong sign, shifted exponent, corrupted series)
+    mellin_cases = [
+        verify_mellin_scale_equivariance(lam_val, max_s=5)
+        for lam_val in (Fraction(7, 3), Fraction(2, 5), Fraction(5, 1))
+    ]
+    mellin_scale_equiv = all(c["all_exact"] for c in mellin_cases)
+
+    neg_wrong_sign = verify_mellin_scale_equivariance(Fraction(7, 3), max_s=5, scale_exponent_sign=1)
+    neg_shifted_exp = verify_mellin_scale_equivariance(Fraction(7, 3), max_s=5, scale_exponent_shift=1)
+    corrupted_rejected = False
+    try:
+        verify_mellin_scale_equivariance(Fraction(7, 3), max_s=5, corrupt_series_c1=Fraction(1, 1))
+    except ValueError:
+        corrupted_rejected = True
+    mellin_neg_controls_ok = (
+        (neg_wrong_sign["all_exact"] is False)
+        and (neg_shifted_exp["all_exact"] is False)
+        and corrupted_rejected
     )
 
     return {
@@ -1021,19 +1225,68 @@ def audit_ramanujan_master_and_summation() -> Dict[str, Any]:
         "ramanujan_master_theorem": {
             "all_4_families_residue_parity_exact": rmt_all_exact,
             "mellin_scale_equivariance_exact": mellin_scale_equiv,
+            "mellin_negative_controls_all_rejected": mellin_neg_controls_ok,
+            "mellin_scale_cases": mellin_cases,
             "families": rmt_summary,
         },
     }
 
 
+def _pillars_all_passed(p1: Dict[str, Any], p2: Dict[str, Any], p3: Dict[str, Any]) -> bool:
+    rr = p1["rogers_ramanujan"]
+    rc = p1["ramanujan_cubic"]
+    gg = p1["gollnitz_gordon"]
+    rmt = p3["ramanujan_master_theorem"]
+    return bool(
+        rr["pgl2_equals_schur_tridiagonal"] is True
+        and rr["pgl2_equals_euler_product"] is True
+        and rr["G_3way_schur_det_eq_qsum_eq_product"] is True
+        and rr["H_3way_schur_det_eq_qsum_eq_product"] is True
+        and rr["quadratic_q_adic_lockin_all_exact"] is True
+        and rr["pgl2_4pt_cross_ratio_poly_invariant"] is True
+        and rr["pgl2_4pt_cross_ratio_at_q_third_invariant"] is True
+        and rr["consec_convergent_cr_closed_law_exact"] is True
+        and rr["quintic_identity_exact_mod_q36"] is True
+        and rr["klein_icosahedral_syzygy_exact"] is True
+        and rr["j_tau_from_R_equals_E4_Delta_exact"] is True
+        and rr["baxter_critical_poly_equals_icosahedral_H_inv"] is True
+        and rc["pgl2_equals_schur_tridiagonal"] is True
+        and rc["pgl2_equals_product_mod_q36"] is True
+        and rc["pgl2_4pt_cross_ratio_poly_invariant"] is True
+        and rc["consec_convergent_cr_closed_law_exact"] is True
+        and gg["pgl2_equals_schur_tridiagonal"] is True
+        and gg["pgl2_equals_product_mod_q36"] is True
+        and gg["pgl2_4pt_cross_ratio_poly_invariant"] is True
+        and gg["consec_convergent_cr_closed_law_exact"] is True
+        and p2["z2_symmetry_schur_block_exact"] is True
+        and all(b["certified_strict_bracket"] is True for b in p2["exact_perron_brackets"])
+        and p2["tropical_cochain_peeling_w3"]["strong_duality_exact_match"] is True
+        and p2["tropical_cochain_peeling_w3"]["strict_separation_3_2_lt_2"] is True
+        and p3["bernoulli_two_oracle_exact_match"] is True
+        and p3["faulhaber_polynomial_exact_k0_to_k5"] is True
+        and p3["shift_anomaly_theorem"]["all_exact_int_0_1_x_pow_k"] is True
+        and p3["regulator_net_equalizer"]["const_term_invariant_across_all_4_nets_k0_to_k5"] is True
+        and p3["regulator_net_equalizer"]["divergent_poles_differ_across_nets"] is True
+        and p3["regulator_net_equalizer"]["shifted_cutoff_breakage_exact"] is True
+        and rmt["all_4_families_residue_parity_exact"] is True
+        and rmt["mellin_scale_equivariance_exact"] is True
+        and rmt["mellin_negative_controls_all_rejected"] is True
+    )
+
+
 def run_all() -> Dict[str, Any]:
+    p1 = audit_ramanujan_continued_fractions()
+    p2 = audit_hardcore_transfer_and_peeling()
+    p3 = audit_ramanujan_master_and_summation()
+    all_passed = _pillars_all_passed(p1, p2, p3)
     return {
         "instrument": "ramanujan_pgl2_mellin",
-        "epistemic_status": "VERIFIED",
+        "all_passed": all_passed,
+        "epistemic_status": "VERIFIED" if all_passed else "FAILED",
         "honest_novelty_class": "N1",
-        "pillar_1_continued_fractions_pgl2_schur": audit_ramanujan_continued_fractions(),
-        "pillar_2_hardcore_transfer_inertia_peeling": audit_hardcore_transfer_and_peeling(),
-        "pillar_3_ramanujan_master_mellin_summation": audit_ramanujan_master_and_summation(),
+        "pillar_1_continued_fractions_pgl2_schur": p1,
+        "pillar_2_hardcore_transfer_inertia_peeling": p2,
+        "pillar_3_ramanujan_master_mellin_summation": p3,
     }
 
 
@@ -1053,7 +1306,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"Cubic exact={p1['ramanujan_cubic']['pgl2_equals_product_mod_q36']}, GG exact={p1['gollnitz_gordon']['pgl2_equals_product_mod_q36']}")
         print(f"Hard-Core W=3 peeling: {p2['tropical_cochain_peeling_w3']['peeled_max_edge_weight']} < {p2['tropical_cochain_peeling_w3']['naive_single_column_upper']}")
         print(f"Shift anomaly exact={p3['shift_anomaly_theorem']['all_exact_int_0_1_x_pow_k']}, Regulator equalizer={p3['regulator_net_equalizer']['const_term_invariant_across_all_4_nets_k0_to_k5']}")
-    return 0
+    return 0 if rep["all_passed"] else 1
 
 
 if __name__ == "__main__":

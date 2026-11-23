@@ -6,9 +6,9 @@
 
 `ramanujan` is a **zero-dependency, pure Python 3 standard-library** (`int`, `fractions.Fraction`) verification suite bridging four independently verified strands of Ramanujan mathematics under one exact algebraic lens (**Schur-complement fiber elimination, Krein inertia, $PGL(2, \mathbb{Q}[[q]])$ cross-ratio invariance, Euler–Witt Hankel filtrations, and exact integer orthogonality**):
 
-- **Zero third-party dependencies** (pure Python 3 stdlib only, `>=3.10`)
+- **Zero required third-party dependencies** (pure Python 3 stdlib `>=3.10` runs all 4 modules and `ramanujan verify`; optional `numpy` extra `pip install -e '.[sampled]'` enables `btz_graphs` Part C2's sampled float64 Monte Carlo $G$ & 400×24 quantization benchmark)
 - **Zero bare `assert`s** (every verification gate remains active under `python3 -O`)
-- **Pure-$\mathbb{Q}/\mathbb{Z}$ exact mathematical proofs** across all 4 modules (`mock_shadows` and `pgl2_mellin` emit `0` floats anywhere in JSON; `btz_graphs` and `sums_mixers` carry explicitly labeled diagnostic float fields only for their Milnor quantization benchmark and float64 DCT-II / spike-peak contrasts)
+- **Explicit float / sampled accounting:** `mock_shadows`, `pgl2_mellin`, and `btz_graphs` Parts A/B/C1/D (or `--exact-only`) emit `0` JSON floats (`exact_math_zero_floats: true`). `btz_graphs` Part C2 (when `numpy` is installed, `30` float64 fields) and `sums_mixers` float64 DCT-II / mirage contrasts (`11` diagnostic float fields) are explicitly labeled as sampled/diagnostic floats (`exact_math_zero_floats: false`, never overstated as zero-float)
 - **Bit-identical deterministic receipts** across all 4 isolated interpreter modes (`-I -B`, `-I -O -B`, `-I -B -W error`, `-I -O -B -W error`)
 - **Strict Epistemic Honesty (Law 4 & Law 5):** Every classical theorem (`R4-N0-01`–`R4-N0-17`) is explicitly quarantined as `N0` prior art. All four bundled modules are honestly classified **`N1`**; we deliberately reserve any *"The Ramanujan Theorem"* title for a future, independently audited **`N2`** unification (see [Open `N2` Proof Program](#open-n2-proof-program-toward-the-ramanujan-theorem)).
 
@@ -26,7 +26,7 @@ PYTHONPATH=. python3 -s -B -m ramanujan verify
 # Emit canonical JSON receipt bundle
 PYTHONPATH=. python3 -s -B -m ramanujan verify --json
 
-# Run the full isolated (-I) master verification & R5 test suite (all 4 modules + 3 R5 suites + CLI checks)
+# Run the full isolated (-I) master verification & R5 test suite (all 4 modules + 4 R5 suites + CLI checks)
 python3 -I -B tests/run_all.py
 ```
 

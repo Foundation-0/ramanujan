@@ -6,10 +6,12 @@ Executes:
   2. Clean-room R5 unittest suite for `ramanujan.mock_shadows` (AUDIT-045)
   3. Clean-room R5 test suite for `ramanujan.pgl2_mellin` (AUDIT-046)
   4. Clean-room R5 unittest suite for `ramanujan.sums_mixers` (AUDIT-048R)
-  5. CLI smoke checks (`list`, `verify --module pgl2_mellin --json`)
+  5. Clean-room R5 regression suite for issues #2-#5 (`test_cli_and_issues_2_5_r5`)
+  6. CLI smoke checks (`list`, `verify --module pgl2_mellin --json`)
 
-Zero third-party dependencies; zero bare `assert`s; bit-identical across all 4 isolated
-R4 modes (`-I -B`, `-I -O -B`, `-I -B -W error`, `-I -O -B -W error`).
+Zero required third-party dependencies (optional `numpy` enables `btz_graphs` Part C2);
+zero bare `assert`s; bit-identical across all 4 isolated R4 modes
+(`-I -B`, `-I -O -B`, `-I -B -W error`, `-I -O -B -W error`).
 """
 
 from __future__ import annotations
@@ -28,6 +30,7 @@ for p in (str(ROOT), str(TESTS_DIR)):
         sys.path.insert(0, p)
 
 from ramanujan import cli  # noqa: E402
+import test_cli_and_issues_2_5_r5  # noqa: E402
 import test_mock_shadows_r5  # noqa: E402
 import test_pgl2_mellin_r5  # noqa: E402
 import test_sums_mixers_r5  # noqa: E402
@@ -58,6 +61,7 @@ def main() -> int:
     n_pgl2 = test_pgl2_mellin_r5.run_all_tests()
     require(n_pgl2 == 3, f"Expected 3 pgl2_mellin test groups, got {n_pgl2}")
     n_sums = _run_unittest_module(test_sums_mixers_r5, "sums_mixers_r5")
+    n_issues = _run_unittest_module(test_cli_and_issues_2_5_r5, "cli_and_issues_2_5_r5")
 
     # 3. CLI smoke checks (no disk side effects)
     buf_list = io.StringIO()
@@ -78,6 +82,7 @@ def main() -> int:
     print(f"  [PASS] mock_shadows R5 unittest: {n_mock}/{n_mock} tests")
     print(f"  [PASS] pgl2_mellin R5 suite:     {n_pgl2}/3 groups")
     print(f"  [PASS] sums_mixers R5 unittest:  {n_sums}/{n_sums} tests")
+    print(f"  [PASS] issues #2-#5 R5 unittest: {n_issues}/{n_issues} tests")
     print(f"  Bundle SHA-256: {bundle['bundle_sha256']}")
     return 0
 
